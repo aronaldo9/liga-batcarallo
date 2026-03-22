@@ -1,0 +1,88 @@
+export const normativa = [
+  {
+    id: "generales",
+    titulo: "Reglas Generales",
+    tipo: "normal",
+    reglas: [
+      "Los parámetros generales de la liga y los torneos se establecerán automáticamente en la aplicación.",
+      "La Superliga Batcarallo está dividida en Liga 1 y Liga 2; las normas son iguales para ambas.",
+      "Esta temporada la liga será Premium: sin necesidad de créditos y sin tener que ver vídeos.",
+      "Solo se permite el mercado de fichajes con computadora. El mercado entre participantes permanecerá abierto desde el inicio del juego hasta la Jornada 1, y en el mercado de invierno en fechas publicadas en el grupo de WhatsApp.",
+      "Con el mercado abierto entre participantes están permitidos: cláusulas de rescisión, cesiones, trueques, subastas y acuerdos comerciales.",
+      "Entrenador activo.",
+    ],
+  },
+  {
+    id: "plantilla",
+    titulo: "Plantilla y Alineación",
+    tipo: "normal",
+    reglas: [
+      "El máximo de jugadores por equipo es de 16 + entrenador. La posición de entrenador no es obligatoria y no supone penalización.",
+      "No se podrá superar el límite de 16 jugadores al comienzo de una jornada. La sanción será la pérdida de puntos y dinero de esa jornada, más la devolución del fichaje infractor.",
+      "Se podrá alinear 1 suplente por posición, que ocupará automáticamente la plaza del titular que no juegue.",
+      "Se podrán hacer cinco cambios por jornada entre jugadores que no hayan jugado en dicha jornada.",
+      "Se podrán hacer cambios de estrategia durante la jornada.",
+      "Hay que empezar la jornada con once jugadores alineados (todas las posiciones ocupadas). De lo contrario, no se obtendrán puntos ni premio en esa jornada.",
+    ],
+  },
+  {
+    id: "capitan",
+    titulo: "Capitán y Ariete",
+    tipo: "normal",
+    reglas: [
+      "Se podrá seleccionar como capitán —puntuará doble— a un jugador cuyo valor de mercado sea inferior a 5 millones.",
+      "Se podrá seleccionar como ariete —obtiene 3 puntos extras si marca gol— a un jugador cuyo valor de mercado sea inferior a 5 millones.",
+    ],
+  },
+  {
+    id: "competiciones",
+    titulo: "Competiciones y Torneos",
+    tipo: "normal",
+    reglas: [
+      "Champions: los 6 primeros de Liga 1, más el campeón de la Copa Batcarallo y el de la Champions, jugarán Champions la temporada siguiente. Si algún campeón de copa ya está entre los 6 primeros, los puestos se completan con el 7.º y 8.º de Liga 1.",
+      "La Copa se disputará de forma conjunta entre las dos ligas.",
+      "FA Cup Batcarallo: para los jugadores de Liga 2 y los no clasificados para Champions.",
+      "Descenso/Ascenso: los 4 últimos de Liga 1 descienden. Los 2 primeros de Liga 2 ascienden automáticamente. Los otros 2 puestos se deciden en la promoción: 3.º vs 6.º y 4.º vs 5.º de Liga 2 (usando los puntos de la última jornada). En caso de empate de puntos, gana el mejor clasificado.",
+      "Si algún participante abandona Liga 1 y quedan vacantes, los puestos se cubren siguiendo el orden de clasificación de la misma liga y, si no hay suficientes, con el 4.º de Liga 2 en adelante.",
+      "Supercopa: campeón de L1, L2, Copa y Champions. Semifinales en Jornada 1 (Nacional: L1 vs L2 — Internacional: Copa vs Champions) y final en Jornada 2. Premios: 1.000.000 al ganador, 500.000 al finalista y 250.000 a los semifinalistas.",
+    ],
+  },
+  {
+    id: "sanciones",
+    titulo: "Sanciones y Conducta",
+    tipo: "warning",
+    reglas: [
+      "Los jugadores deben participar regularmente para no perjudicar al resto ni desmerecer el trabajo de organización.",
+      "Los administradores podrán aplicar las sanciones que consideren pertinentes: económicas, pérdida de puntos o expulsión del juego.",
+      "Para cualquier duda, contactar con los administradores: Aaron, Ángel y David.",
+    ],
+  },
+  {
+    id: "compensaciones",
+    titulo: "Compensaciones Económicas",
+    tipo: "prize",
+    reglas: [
+      "15.000 por cada punto conseguido en cada jornada, en orden inverso.",
+      "Copa y Champions (fase de grupos): 500.000 al ganador y 250.000 al perdedor por jornada; además, 500.000 por pasar a cuartos, semifinales y final.",
+      "FA Cup Batcarallo: 300.000 al ganador y 150.000 al perdedor por partido. Premio único al campeón: 1.000.000.",
+      "250.000 por cada componente del Once Ideal de cada jornada.",
+      "250.000 por el MVP de la jornada.",
+    ],
+  },
+  {
+    id: "quiniela",
+    titulo: "Quiniela Batcarallo",
+    tipo: "normal",
+    reglas: [
+      "Hay que pronosticar 3 partidos en formato 1X2: 2 simples y 1 partido de jornada. Si alguno se suspende, el admin designará un sustituto durante la jornada.",
+      "Los partidos se publicarán en el grupo de WhatsApp antes de empezar la jornada. Los pronósticos se envían por WhatsApp privado al admin David dentro del plazo indicado para cada jornada.",
+      "Puntuación: 20 puntos por acertar 1 partido simple · 50 puntos por 2 simples · 100 puntos por los 2 simples más el partido de jornada (el partido de jornada no cuenta por sí solo).",
+      "10.000 por punto al término de cada quiniela.",
+      "Clasificación mensual: se suman los puntos de las quinielas del mes. El ganador mensual recibe 1.000.000 extra. En caso de empate, el premio se reparte a partes iguales y se anota una victoria mensual para todos los empatados.",
+      "Pichichi al final de temporada: gana quien más puntos acumule (desempate: victorias mensuales → puntos de liga → valor de mercado del equipo).",
+      "Solo habrá quiniela en jornadas oficiales de liga, con mínimo 1 partido de la Liga Española. Puede haber quinielas extras en Champions, Europa League, Conference o selecciones, a criterio del admin o por petición; estas no puntúan para el Pichichi.",
+      "Para participar en la quiniela regular hay que estar en positivo y con todas las posiciones del equipo ocupadas. En las extraordinarias estas condiciones no son necesarias.",
+      "El que no participe en 3 quinielas consecutivas quedará eliminado de la quiniela.",
+    ],
+  },
+];

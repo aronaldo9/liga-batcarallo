@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-gotham: #0a0a0a;
+  --color-gotham-surface: #111111;
+  --color-gotham-card: #141414;
+  --color-gotham-border: #2a2a2a;
+  --color-batman-yellow: #f5c518;
+  --color-batman-yellow-dark: #c9a012;
+  --color-gotham-text: #f0f0f0;
+  --color-gotham-muted: #888888;
+  --font-display: var(--font-bangers);
+}
+
+body {
+  background-color: #0a0a0a;
+  color: #f0f0f0;
+}
+
+/* Halftone dot pattern */
+.halftone {
+  background-image: radial-gradient(circle, #333 1.2px, transparent 1.2px);
+  background-size: 18px 18px;
+}
+
+/* Comic panel */
+.panel {
+  border: 4px solid #f5c518;
+  box-shadow: 6px 6px 0px 0px #000000;
+}
+
+.panel-black {
+  border: 4px solid #000;
+  box-shadow: 6px 6px 0px 0px #f5c518;
+}
+
+/* Speed lines radial */
+.speed-lines {
+  background-image: repeating-conic-gradient(
+    #1a1a1a 0deg,
+    #0a0a0a 1deg,
+    #0a0a0a 3deg
+  );
+}
+
+/* Text outline style */
+.text-outline {
+  -webkit-text-stroke: 2px #000;
+  paint-order: stroke fill;
+}

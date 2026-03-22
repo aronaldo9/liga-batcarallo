@@ -1,80 +1,135 @@
-# Project Overview
+# Proyecto: Liga Batcarallo Biwenger
 
-This is a solo-maintained project.
+## 🧠 Contexto
 
-Goals:
+Este proyecto es una web para una liga privada de Biwenger.  
+Su objetivo es centralizar información de la liga en una web visual, clara y temática.
 
-- simplicity
-- readability
-- maintainability
-- fast iteration
-- efficient use of Claude tokens
+La temática mezcla:
 
-Avoid unnecessary complexity or over-engineering.
+- 🦇 Batman (Gotham, oscuro, estilo visual)
+- ⚽ Fútbol (liga fantasy Biwenger)
 
----
-
-## Core Principles
-
-1. Prefer the smallest possible change that solves the problem.
-2. Do not propose architectural changes unless explicitly requested.
-3. Do not introduce new dependencies without clear necessity.
-4. Reuse existing patterns in the codebase.
-5. Preserve existing behavior unless the user asks to modify it.
-6. Do not suggest improvements outside the scope of the request.
+No sustituye a Biwenger, solo actúa como web informativa/consulta.
 
 ---
 
-## Token Efficiency Rules
+## 🎯 Objetivos del proyecto
 
-- Keep explanations concise.
-- Do not repeat context unnecessarily.
-- Avoid long multi-step plans unless required.
-- Solve tasks in a single iteration when possible.
-
----
-
-## Workflow
-
-Default approach:
-
-1. Understand the request
-2. If needed, propose a minimal plan
-3. Implement
-4. Stop
-
-If the task is simple, do not create a plan. Execute directly.
+- Mostrar información de la liga de forma ordenada
+- Mejorar la presentación respecto a una web tipo blog
+- Incluir:
+  - Normativa
+  - Miembros
+  - Palmarés
+  - Información general
 
 ---
 
-## Accuracy Rules
+## 🧱 Stack
 
-- Never assume functions, APIs, or files exist without verifying.
-- Always read relevant files before making changes.
-- If something is unclear, ask instead of guessing.
-- Do not invent libraries, functions, or configurations.
-- Explicitly state uncertainty when it exists.
+- Next.js
+- React
+- Tailwind CSS
 
----
-
-## Code Modification Policy
-
-- Prefer small incremental edits.
-- Avoid rewriting entire files.
-- Do not refactor unrelated code.
-- Keep diffs minimal and focused.
+(No introducir otras tecnologías sin necesidad explícita)
 
 ---
 
-## Safety
+## 📁 Estructura esperada
 
-Never:
+- /app o /pages (según configuración Next.js)
+- /components
+- /data (datos mock en JSON)
+- /styles
 
-- expose secrets
-- modify environment variables
-- change deployment configuration
-- perform destructive operations without explicit request
+Mantener separación por responsabilidades.
 
 ---
 
-Stop once the task is completed. Do not continue suggesting improvements.
+## 📊 Datos
+
+Inicialmente los datos serán estáticos (JSON o JS):
+
+- miembros
+- palmarés
+- normativa
+
+No implementar backend en fases iniciales.
+
+---
+
+## 🎨 Estilo visual
+
+- Tema oscuro (inspirado en Gotham / Batman)
+- Colores principales:
+  - negro / gris oscuro
+  - amarillo tipo Batman como acento
+
+- UI basada en:
+  - cards
+  - secciones claras
+  - tipografía legible
+  - buen espaciado
+
+---
+
+## 🧩 Reglas de desarrollo
+
+- Crear componentes reutilizables
+- Mantener componentes pequeños y enfocados
+- Evitar duplicación de código
+- Usar props claramente tipadas/definidas
+- No sobrecomplicar la arquitectura
+
+---
+
+## 🚫 Restricciones
+
+- No introducir backend (Strapi, DB, APIs) en fases iniciales
+- No añadir funcionalidades no solicitadas
+- No crear estructuras innecesariamente complejas
+- No mezclar lógica de UI con lógica de datos
+
+---
+
+## 🧭 Páginas principales
+
+- Home
+- Normativa
+- Miembros
+- Palmarés
+
+---
+
+## 🧠 Cómo debe trabajar Claude en este proyecto
+
+Cuando se solicite ayuda:
+
+- Proponer soluciones simples y escalables
+- Respetar la estructura existente
+- Generar código limpio y modular
+- Explicar cambios cuando sea necesario
+- No asumir decisiones sin contexto
+
+---
+
+## ✅ Prioridades
+
+1. Claridad del código
+2. Organización del proyecto
+3. Facilidad de mantenimiento
+4. Consistencia visual
+5. Experiencia de usuario
+
+---
+
+## 🎯 Enfoque general
+
+Pensar en este proyecto como un portal de liga real, no como un demo técnico.
+
+El objetivo es que sea:
+
+- usable
+- visualmente atractivo
+- fácil de ampliar en el futuro

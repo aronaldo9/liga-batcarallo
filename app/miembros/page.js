@@ -1,6 +1,25 @@
-import { miembros } from "@/data/miembros";
+import { primera, segunda } from "@/data/miembros";
+import MemberCard from "@/components/MemberCard";
 
 export const metadata = { title: "Miembros · Liga Batcarallo" };
+
+function DivisionHeader({ title, subtitle }) {
+  return (
+    <div className="mb-8 mt-14 first:mt-0">
+      <p className="text-batman-yellow text-xs font-bold uppercase tracking-widest mb-1">
+        {subtitle}
+      </p>
+      <h2
+        className="font-[family-name:var(--font-bangers)] text-5xl text-gotham-text tracking-widest"
+        style={{ textShadow: "3px 3px 0 #000" }}
+      >
+        {title}
+      </h2>
+      <div className="border-b-4 border-gotham-border mt-4" />
+    </div>
+  );
+}
+
 
 export default function MiembrosPage() {
   return (
@@ -22,42 +41,19 @@ export default function MiembrosPage() {
         <div className="border-b-4 border-batman-yellow" />
       </div>
 
-      {/* Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {miembros.map((m, i) => (
-          <div
-            key={m.id}
-            className="bg-gotham-card border-4 border-batman-yellow p-6 hover:scale-105 transition-transform duration-200"
-            style={{
-              boxShadow: "6px 6px 0 #000",
-              transform: `rotate(${i % 2 === 0 ? "-0.8" : "0.8"}deg)`,
-            }}
-          >
-            {/* Number badge */}
-            <div className="flex items-start justify-between mb-4">
-              <span
-                className="font-[family-name:var(--font-bangers)] text-5xl text-gotham-border leading-none"
-                style={{ WebkitTextStroke: "1px #333" }}
-              >
-                #{String(i + 1).padStart(2, "0")}
-              </span>
-              {m.titulos > 0 && (
-                <span className="bg-batman-yellow text-black text-xs font-black px-2 py-1 uppercase tracking-wider">
-                  🏆 ×{m.titulos}
-                </span>
-              )}
-            </div>
+      {/* Primera División */}
+      <DivisionHeader title="Primera División" subtitle="La élite de Gotham" />
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+        {primera.map((m, i) => (
+          <MemberCard key={m.id} miembro={m} index={i} />
+        ))}
+      </div>
 
-            <h2 className="font-[family-name:var(--font-bangers)] text-2xl text-gotham-text tracking-wider mb-1">
-              {m.nombre}
-            </h2>
-            <p className="text-batman-yellow text-sm font-bold uppercase tracking-widest mb-4">
-              {m.equipo}
-            </p>
-            <div className="border-t-2 border-gotham-border pt-3 text-gotham-muted text-xs uppercase tracking-widest">
-              {m.temporadas} temporadas
-            </div>
-          </div>
+      {/* Segunda División */}
+      <DivisionHeader title="Segunda División" subtitle="Ascendiendo desde las sombras" />
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+        {segunda.map((m, i) => (
+          <MemberCard key={m.id} miembro={m} index={i} />
         ))}
       </div>
     </div>

@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 
-export default function MemberCard({ miembro, index }) {
+export default function MemberCard({ miembro, index, priority = false }) {
   const [imgSrc, setImgSrc] = useState(miembro.imagen);
 
   return (
@@ -22,6 +22,7 @@ export default function MemberCard({ miembro, index }) {
           fill
           className="object-cover object-top"
           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+          priority={priority}
           onError={() => setImgSrc("/skyline.png")}
         />
         {/* Gradient overlay at bottom */}

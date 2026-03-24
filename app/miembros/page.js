@@ -45,7 +45,7 @@ export default function MiembrosPage() {
       <DivisionHeader title="Primera División" subtitle="La élite de Gotham" />
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
         {primera.map((m, i) => (
-          <MemberCard key={m.id} miembro={m} index={i} />
+          <MemberCard key={m.id} miembro={m} index={i} priority={i < 4} />
         ))}
       </div>
 

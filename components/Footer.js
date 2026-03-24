@@ -10,7 +10,7 @@ export default function Footer() {
             src="/logo-batcarallo.png"
             alt="Liga Batcarallo"
             width={64}
-            height={35}
+            height={64}
             className="object-contain"
           />
           <span className="font-[family-name:var(--font-bangers)] text-batman-yellow text-xl tracking-widest">

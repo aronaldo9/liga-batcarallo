@@ -18,6 +18,7 @@ export default function Navbar() {
             width={52}
             height={52}
             className="object-contain"
+            style={{ height: "auto" }}
           />
           <span className="font-[family-name:var(--font-bangers)] text-batman-yellow text-2xl tracking-widest group-hover:text-white transition-colors">
             Liga Batcarallo

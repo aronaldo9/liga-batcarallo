@@ -12,6 +12,7 @@ export default function Footer() {
             width={64}
             height={64}
             className="object-contain"
+            style={{ height: "auto" }}
           />
           <span className="font-[family-name:var(--font-bangers)] text-batman-yellow text-xl tracking-widest">
             Liga Batcarallo

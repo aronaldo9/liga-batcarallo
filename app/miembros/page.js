@@ -1,5 +1,14 @@
 import { primera, segunda } from "@/data/miembros";
+import { logrosIndividuales } from "@/data/palmares";
 import MemberCard from "@/components/MemberCard";
+
+function getLogros(memberId) {
+  return logrosIndividuales.find((l) => l.memberId === memberId)?.logros ?? [];
+}
+
+function getTitulos(memberId) {
+  return getLogros(memberId).filter((l) => l.posicion === "Campeón/a").length;
+}
 
 export const metadata = { title: "Miembros · Liga Batcarallo" };
 
@@ -45,7 +54,7 @@ export default function MiembrosPage() {
       <DivisionHeader title="Primera División" subtitle="La élite de Gotham" />
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
         {primera.map((m, i) => (
-          <MemberCard key={m.id} miembro={m} index={i} priority={i < 4} />
+          <MemberCard key={m.id} miembro={{ ...m, titulos: getTitulos(m.id) }} logros={getLogros(m.id)} index={i} priority={i < 4} />
         ))}
       </div>
 
@@ -53,7 +62,7 @@ export default function MiembrosPage() {
       <DivisionHeader title="Segunda División" subtitle="Ascendiendo desde las sombras" />
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
         {segunda.map((m, i) => (
-          <MemberCard key={m.id} miembro={m} index={i} />
+          <MemberCard key={m.id} miembro={{ ...m, titulos: getTitulos(m.id) }} logros={getLogros(m.id)} index={i} />
         ))}
       </div>
     </div>

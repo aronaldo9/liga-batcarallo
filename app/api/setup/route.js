@@ -91,7 +91,7 @@ export async function POST() {
       );
     }
 
-    const defaultPassword = 'batcarallo';
+    const defaultPassword = 'batcarallo2026';
     const miembrosValidos = miembros.filter((m) => !EXCLUIR_NOMBRES.includes(m.nombre));
 
     // Detectar usernames duplicados (ej: dos "Antonio") y añadir sufijo

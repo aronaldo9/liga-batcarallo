@@ -7,8 +7,8 @@ import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 const BASE = 'http://localhost:3000';
 
 // Credenciales de prueba
-const ADMIN = { username: 'aaron', password: 'batcarallo' };
-const USER = { username: 'david', password: 'batcarallo' };
+const ADMIN = { username: 'aaron', password: 'batcarallo2026' };
+const USER = { username: 'david', password: 'batcarallo2026' };
 
 let adminCookie = '';
 let userCookie = '';

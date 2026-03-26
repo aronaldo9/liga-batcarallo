@@ -7,27 +7,27 @@ import { hashPassword, verifyPassword, verifySessionToken, createSessionCookie }
 
 describe('hashPassword / verifyPassword', () => {
   it('genera un hash en formato salt:hash', () => {
-    const hash = hashPassword('batcarallo');
+    const hash = hashPassword('batcarallo2026');
     expect(hash).toMatch(/^[a-f0-9]+:[a-f0-9]+$/);
   });
 
   it('verifica correctamente la contraseña correcta', () => {
-    const hash = hashPassword('batcarallo');
-    expect(verifyPassword('batcarallo', hash)).toBe(true);
+    const hash = hashPassword('batcarallo2026');
+    expect(verifyPassword('batcarallo2026', hash)).toBe(true);
   });
 
   it('rechaza una contraseña incorrecta', () => {
-    const hash = hashPassword('batcarallo');
+    const hash = hashPassword('batcarallo2026');
     expect(verifyPassword('otracosa', hash)).toBe(false);
   });
 
   it('dos hashes del mismo password son distintos (salt aleatorio)', () => {
-    const h1 = hashPassword('batcarallo');
-    const h2 = hashPassword('batcarallo');
+    const h1 = hashPassword('batcarallo2026');
+    const h2 = hashPassword('batcarallo2026');
     expect(h1).not.toBe(h2);
     // Pero ambos verifican correctamente
-    expect(verifyPassword('batcarallo', h1)).toBe(true);
-    expect(verifyPassword('batcarallo', h2)).toBe(true);
+    expect(verifyPassword('batcarallo2026', h1)).toBe(true);
+    expect(verifyPassword('batcarallo2026', h2)).toBe(true);
   });
 });
 

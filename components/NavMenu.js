@@ -1,17 +1,20 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
+
+function LogoutForm({ className }) {
+  return (
+    <form action="/api/auth/logout" method="POST">
+      <button type="submit" className={className}>
+        Salir
+      </button>
+    </form>
+  );
+}
 
 export default function NavMenu({ links, session }) {
   const [open, setOpen] = useState(false);
-  const router = useRouter();
-
-  async function handleLogout() {
-    await fetch("/api/auth/logout", { method: "POST" });
-    window.location.href = "/";
-  }
 
   return (
     <>
@@ -41,14 +44,7 @@ export default function NavMenu({ links, session }) {
             <Link href="/perfil" className="text-xs text-gotham-muted uppercase tracking-widest hover:text-batman-yellow transition-colors">
               {session.username}
             </Link>
-            <form action="/api/logout" method="POST">
-              <button
-                type="submit"
-                className="px-3 py-1 text-xs font-bold uppercase tracking-widest text-gotham-muted hover:text-black hover:bg-batman-yellow transition-colors"
-              >
-                Salir
-              </button>
-            </form>
+            <LogoutForm className="px-3 py-1 text-xs font-bold uppercase tracking-widest text-gotham-muted hover:text-black hover:bg-batman-yellow transition-colors" />
           </div>
         ) : (
           <Link
@@ -99,12 +95,7 @@ export default function NavMenu({ links, session }) {
                 <Link href="/perfil" onClick={() => setOpen(false)} className="text-xs text-gotham-muted uppercase tracking-widest hover:text-batman-yellow transition-colors">
                   {session.username}
                 </Link>
-                <button
-                  onClick={handleLogout}
-                  className="px-3 py-1 text-xs font-bold uppercase tracking-widest text-gotham-muted hover:text-black hover:bg-batman-yellow transition-colors"
-                >
-                  Salir
-                </button>
+                <LogoutForm className="px-3 py-1 text-xs font-bold uppercase tracking-widest text-gotham-muted hover:text-black hover:bg-batman-yellow transition-colors" />
               </div>
             ) : (
               <Link

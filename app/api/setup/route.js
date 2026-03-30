@@ -85,15 +85,21 @@ export async function POST() {
   try {
     await createTables();
 
-    const [existing] = await db.query('SELECT COUNT(*) as count FROM users');
-    if (parseInt(existing[0].count) > 0) {
+    const existing = await db.query('SELECT COUNT(*) as count FROM users');
+    if (parseInt(existing.rows[0].count) > 0) {
       return NextResponse.json(
         { error: 'Los usuarios ya existen. Setup solo se ejecuta una vez.' },
         { status: 409 }
       );
     }
 
-    const defaultPassword = 'batcarallo2026';
+    const defaultPassword = process.env.DEFAULT_PASSWORD;
+    if (!defaultPassword) {
+      return NextResponse.json(
+        { error: 'DEFAULT_PASSWORD no está configurada en las variables de entorno.' },
+        { status: 500 }
+      );
+    }
     const miembrosValidos = miembros.filter((m) => !EXCLUIR_NOMBRES.includes(m.nombre));
 
     const usernameCounts = {};

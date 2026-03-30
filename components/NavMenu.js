@@ -39,9 +39,9 @@ export default function NavMenu({ links, session }) {
 
         {session ? (
           <div className="flex items-center gap-1 ml-3 border-l border-gotham-muted pl-3">
-            <span className="text-xs text-gotham-muted uppercase tracking-widest">
+            <Link href="/perfil" className="text-xs text-gotham-muted uppercase tracking-widest hover:text-batman-yellow transition-colors">
               {session.username}
-            </span>
+            </Link>
             <form action="/api/logout" method="POST">
               <button
                 type="submit"
@@ -97,9 +97,9 @@ export default function NavMenu({ links, session }) {
           <div className="px-6 py-4 border-t border-gotham-border">
             {session ? (
               <div className="flex items-center justify-between">
-                <span className="text-xs text-gotham-muted uppercase tracking-widest">
+                <Link href="/perfil" onClick={() => setOpen(false)} className="text-xs text-gotham-muted uppercase tracking-widest hover:text-batman-yellow transition-colors">
                   {session.username}
-                </span>
+                </Link>
                 <button
                   onClick={handleLogout}
                   className="px-3 py-1 text-xs font-bold uppercase tracking-widest text-gotham-muted hover:text-black hover:bg-batman-yellow transition-colors"

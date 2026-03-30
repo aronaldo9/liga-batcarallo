@@ -41,7 +41,7 @@ export default function MiembrosPage() {
             Los elegidos de Gotham
           </p>
           <h1
-            className="font-[family-name:var(--font-bangers)] text-7xl text-batman-yellow tracking-widest"
+            className="font-[family-name:var(--font-bangers)] text-5xl sm:text-7xl text-batman-yellow tracking-widest"
             style={{ textShadow: "4px 4px 0 #000" }}
           >
             Miembros

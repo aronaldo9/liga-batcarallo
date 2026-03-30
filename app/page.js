@@ -82,7 +82,7 @@ export default async function Home() {
               alt="Liga Batcarallo"
               width={520}
               height={520}
-              className="object-contain"
+              className="object-contain w-full max-w-[320px] sm:max-w-[520px]"
               style={{ height: "auto" }}
               priority
             />

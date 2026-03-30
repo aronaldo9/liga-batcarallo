@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function Footer() {
   return (
     <footer className="border-t-4 border-batman-yellow bg-black mt-auto">
-      <div className="mx-auto max-w-5xl px-4 py-4 flex items-center justify-between">
+      <div className="mx-auto max-w-5xl px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
         <Link href="/" className="flex items-center gap-3">
           <Image
             src="/logo-batcarallo.png"

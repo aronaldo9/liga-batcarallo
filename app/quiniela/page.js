@@ -26,39 +26,39 @@ function estadoBadge(estado) {
 }
 
 async function getRankingMensual() {
-  const ahora = new Date();
-  const [rows] = await db.query(
-    `SELECT u.username, u.member_id, SUM(r.puntos) as puntos
-     FROM quiniela_resultados r
-     JOIN users u ON u.id = r.user_id
-     JOIN quiniela_jornadas j ON j.id = r.jornada_id
-     WHERE EXTRACT(YEAR FROM j.fecha_jornada) = ? AND EXTRACT(MONTH FROM j.fecha_jornada) = ?
-     AND u.quiniela_eliminado = FALSE
-     GROUP BY u.id
-     ORDER BY puntos DESC`,
-    [ahora.getFullYear(), ahora.getMonth() + 1]
-  );
-  return rows;
+  try {
+    const ahora = new Date();
+    const [rows] = await db.query(
+      `SELECT u.username, u.member_id, SUM(r.puntos) as puntos
+       FROM quiniela_resultados r
+       JOIN users u ON u.id = r.user_id
+       JOIN quiniela_jornadas j ON j.id = r.jornada_id
+       WHERE EXTRACT(YEAR FROM j.fecha_jornada) = ? AND EXTRACT(MONTH FROM j.fecha_jornada) = ?
+       AND u.quiniela_eliminado = FALSE
+       GROUP BY u.id, u.username, u.member_id
+       ORDER BY puntos DESC`,
+      [ahora.getFullYear(), ahora.getMonth() + 1]
+    );
+    return rows;
+  } catch {
+    return [];
+  }
 }
 
 async function getPichichi() {
-  const [rows] = await db.query(
-    `SELECT u.username, u.member_id, SUM(r.puntos) as puntos,
-            COUNT(CASE WHEN mes_rank = 1 THEN 1 END) as victorias_mensuales
-     FROM (
-       SELECT r.user_id, r.puntos,
-              RANK() OVER (PARTITION BY TO_CHAR(j.fecha_jornada, 'YYYY-MM') ORDER BY SUM(r.puntos) DESC) as mes_rank
+  try {
+    const [rows] = await db.query(
+      `SELECT u.username, u.member_id, SUM(r.puntos) as puntos
        FROM quiniela_resultados r
-       JOIN quiniela_jornadas j ON j.id = r.jornada_id
-       GROUP BY r.user_id, TO_CHAR(j.fecha_jornada, 'YYYY-MM')
-     ) ranked
-     JOIN users u ON u.id = ranked.user_id
-     WHERE u.quiniela_eliminado = FALSE
-     JOIN quiniela_resultados r ON r.user_id = ranked.user_id
-     GROUP BY ranked.user_id
-     ORDER BY SUM(r.puntos) DESC`
-  );
-  return rows;
+       JOIN users u ON u.id = r.user_id
+       WHERE u.quiniela_eliminado = FALSE
+       GROUP BY u.id, u.username, u.member_id
+       ORDER BY puntos DESC`
+    );
+    return rows;
+  } catch {
+    return [];
+  }
 }
 
 export default async function QuinielaPage() {

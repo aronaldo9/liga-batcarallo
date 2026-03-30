@@ -25,8 +25,8 @@ export default function LoginPage() {
       if (!res.ok) {
         setError(data.error || 'Error al iniciar sesión');
       } else {
-        router.push('/quiniela');
         router.refresh();
+        router.push('/');
       }
     } catch {
       setError('Error de conexión');

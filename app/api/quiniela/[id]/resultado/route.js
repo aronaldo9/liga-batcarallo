@@ -63,9 +63,32 @@ export async function POST(request, { params }) {
     for (const [userId, pronosticos] of Object.entries(porUsuario)) {
       const puntos = calcularPuntuacion(partidos, pronosticos);
       await db.query(
-        'INSERT INTO quiniela_resultados (jornada_id, user_id, puntos) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE puntos = VALUES(puntos)',
+        `INSERT INTO quiniela_resultados (jornada_id, user_id, puntos) VALUES (?, ?, ?)
+         ON CONFLICT (jornada_id, user_id) DO UPDATE SET puntos = EXCLUDED.puntos`,
         [id, userId, puntos]
       );
+    }
+
+    // Actualizar ausencias consecutivas
+    const [todosUsuarios] = await db.query(
+      'SELECT id FROM users WHERE quiniela_eliminado = FALSE'
+    );
+    const participaron = new Set(Object.keys(porUsuario).map(Number));
+
+    for (const { id: uid } of todosUsuarios) {
+      if (participaron.has(uid)) {
+        // Participó: resetear ausencias
+        await db.query('UPDATE users SET ausencias_consecutivas = 0 WHERE id = ?', [uid]);
+      } else {
+        // No participó: incrementar y eliminar si llega a 3
+        await db.query(
+          `UPDATE users
+           SET ausencias_consecutivas = ausencias_consecutivas + 1,
+               quiniela_eliminado = CASE WHEN ausencias_consecutivas + 1 >= 3 THEN TRUE ELSE FALSE END
+           WHERE id = ?`,
+          [uid]
+        );
+      }
     }
 
     return NextResponse.json({ ok: true });

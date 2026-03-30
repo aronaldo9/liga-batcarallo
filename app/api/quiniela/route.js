@@ -41,10 +41,10 @@ export async function POST(request) {
     }
 
     const [result] = await db.query(
-      'INSERT INTO quiniela_jornadas (numero, descripcion, fecha_jornada, fecha_limite) VALUES (?, ?, ?, ?)',
+      'INSERT INTO quiniela_jornadas (numero, descripcion, fecha_jornada, fecha_limite) VALUES (?, ?, ?, ?) RETURNING id',
       [numero, descripcion || null, fecha_jornada, fecha_limite]
     );
-    const jornadaId = result.insertId;
+    const jornadaId = result[0].id;
 
     for (const partido of partidos) {
       await db.query(

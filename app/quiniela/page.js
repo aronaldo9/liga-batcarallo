@@ -32,7 +32,8 @@ async function getRankingMensual() {
      FROM quiniela_resultados r
      JOIN users u ON u.id = r.user_id
      JOIN quiniela_jornadas j ON j.id = r.jornada_id
-     WHERE YEAR(j.fecha_jornada) = ? AND MONTH(j.fecha_jornada) = ?
+     WHERE EXTRACT(YEAR FROM j.fecha_jornada) = ? AND EXTRACT(MONTH FROM j.fecha_jornada) = ?
+     AND u.quiniela_eliminado = FALSE
      GROUP BY u.id
      ORDER BY puntos DESC`,
     [ahora.getFullYear(), ahora.getMonth() + 1]
@@ -46,12 +47,13 @@ async function getPichichi() {
             COUNT(CASE WHEN mes_rank = 1 THEN 1 END) as victorias_mensuales
      FROM (
        SELECT r.user_id, r.puntos,
-              RANK() OVER (PARTITION BY DATE_FORMAT(j.fecha_jornada, '%Y-%m') ORDER BY SUM(r.puntos) DESC) as mes_rank
+              RANK() OVER (PARTITION BY TO_CHAR(j.fecha_jornada, 'YYYY-MM') ORDER BY SUM(r.puntos) DESC) as mes_rank
        FROM quiniela_resultados r
        JOIN quiniela_jornadas j ON j.id = r.jornada_id
-       GROUP BY r.user_id, DATE_FORMAT(j.fecha_jornada, '%Y-%m')
+       GROUP BY r.user_id, TO_CHAR(j.fecha_jornada, 'YYYY-MM')
      ) ranked
      JOIN users u ON u.id = ranked.user_id
+     WHERE u.quiniela_eliminado = FALSE
      JOIN quiniela_resultados r ON r.user_id = ranked.user_id
      GROUP BY ranked.user_id
      ORDER BY SUM(r.puntos) DESC`

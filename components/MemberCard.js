@@ -44,18 +44,18 @@ function CardBack({ miembro, logros }) {
   );
 }
 
-export default function MemberCard({ miembro, logros = [], index, priority = false }) {
+export default function MemberCard({ miembro, logros = [], index, priority = false, flippable = true }) {
   const [flipped, setFlipped] = useState(false);
   const [imgSrc, setImgSrc] = useState(miembro.imagen);
 
   return (
     <div
-      className="cursor-pointer"
+      className={flippable ? "cursor-pointer" : ""}
       style={{
         perspective: "1000px",
         transform: `rotate(${index % 2 === 0 ? "-0.6" : "0.6"}deg)`,
       }}
-      onClick={() => setFlipped(!flipped)}
+      onClick={() => flippable && setFlipped(!flipped)}
     >
       <div
         style={{
@@ -106,7 +106,7 @@ export default function MemberCard({ miembro, logros = [], index, priority = fal
         </div>
 
         {/* Dorso */}
-        <CardBack miembro={miembro} logros={logros} />
+        {flippable && <CardBack miembro={miembro} logros={logros} />}
       </div>
     </div>
   );

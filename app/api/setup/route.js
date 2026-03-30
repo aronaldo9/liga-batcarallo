@@ -13,7 +13,7 @@ function toUsername(nombre) {
   return nombre
     .toLowerCase()
     .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '') // quitar tildes
+    .replace(/[\u0300-\u036f]/g, '')
     .replace(/\s+/g, '_')
     .replace(/[^a-z0-9_]/g, '');
 }
@@ -21,46 +21,48 @@ function toUsername(nombre) {
 async function createTables() {
   await db.query(`
     CREATE TABLE IF NOT EXISTS users (
-      id INT PRIMARY KEY AUTO_INCREMENT,
+      id SERIAL PRIMARY KEY,
       member_id INT NOT NULL,
       username VARCHAR(50) UNIQUE NOT NULL,
       password_hash VARCHAR(200) NOT NULL,
       is_admin BOOLEAN DEFAULT FALSE,
+      quiniela_eliminado BOOLEAN NOT NULL DEFAULT FALSE,
+      ausencias_consecutivas INT NOT NULL DEFAULT 0,
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )
   `);
   await db.query(`
     CREATE TABLE IF NOT EXISTS quiniela_jornadas (
-      id INT PRIMARY KEY AUTO_INCREMENT,
+      id SERIAL PRIMARY KEY,
       numero INT NOT NULL,
       descripcion VARCHAR(255),
       fecha_jornada DATE NOT NULL,
-      fecha_limite DATETIME NOT NULL,
-      estado ENUM('abierta', 'cerrada', 'con_resultado') DEFAULT 'abierta',
+      fecha_limite TIMESTAMP NOT NULL,
+      estado VARCHAR(20) DEFAULT 'abierta' CHECK (estado IN ('abierta', 'cerrada', 'con_resultado')),
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )
   `);
   await db.query(`
     CREATE TABLE IF NOT EXISTS quiniela_partidos (
-      id INT PRIMARY KEY AUTO_INCREMENT,
+      id SERIAL PRIMARY KEY,
       jornada_id INT NOT NULL,
-      tipo ENUM('simple', 'jornada') NOT NULL,
+      tipo VARCHAR(10) NOT NULL CHECK (tipo IN ('simple', 'jornada')),
       orden INT NOT NULL,
       equipo_local VARCHAR(100) NOT NULL,
       equipo_visitante VARCHAR(100) NOT NULL,
-      resultado ENUM('1', 'X', '2') NULL DEFAULT NULL,
+      resultado VARCHAR(2) DEFAULT NULL CHECK (resultado IN ('1', 'X', '2')),
       FOREIGN KEY (jornada_id) REFERENCES quiniela_jornadas(id) ON DELETE CASCADE
     )
   `);
   await db.query(`
     CREATE TABLE IF NOT EXISTS quiniela_pronosticos (
-      id INT PRIMARY KEY AUTO_INCREMENT,
+      id SERIAL PRIMARY KEY,
       jornada_id INT NOT NULL,
       user_id INT NOT NULL,
       partido_id INT NOT NULL,
-      pronostico ENUM('1', 'X', '2') NOT NULL,
+      pronostico VARCHAR(2) NOT NULL CHECK (pronostico IN ('1', 'X', '2')),
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-      UNIQUE KEY unique_pronostico (user_id, partido_id),
+      UNIQUE (user_id, partido_id),
       FOREIGN KEY (jornada_id) REFERENCES quiniela_jornadas(id) ON DELETE CASCADE,
       FOREIGN KEY (user_id) REFERENCES users(id),
       FOREIGN KEY (partido_id) REFERENCES quiniela_partidos(id) ON DELETE CASCADE
@@ -68,11 +70,11 @@ async function createTables() {
   `);
   await db.query(`
     CREATE TABLE IF NOT EXISTS quiniela_resultados (
-      id INT PRIMARY KEY AUTO_INCREMENT,
+      id SERIAL PRIMARY KEY,
       jornada_id INT NOT NULL,
       user_id INT NOT NULL,
       puntos INT NOT NULL DEFAULT 0,
-      UNIQUE KEY unique_resultado (jornada_id, user_id),
+      UNIQUE (jornada_id, user_id),
       FOREIGN KEY (jornada_id) REFERENCES quiniela_jornadas(id) ON DELETE CASCADE,
       FOREIGN KEY (user_id) REFERENCES users(id)
     )
@@ -84,7 +86,7 @@ export async function POST() {
     await createTables();
 
     const [existing] = await db.query('SELECT COUNT(*) as count FROM users');
-    if (existing[0].count > 0) {
+    if (parseInt(existing[0].count) > 0) {
       return NextResponse.json(
         { error: 'Los usuarios ya existen. Setup solo se ejecuta una vez.' },
         { status: 409 }
@@ -94,7 +96,6 @@ export async function POST() {
     const defaultPassword = 'batcarallo2026';
     const miembrosValidos = miembros.filter((m) => !EXCLUIR_NOMBRES.includes(m.nombre));
 
-    // Detectar usernames duplicados (ej: dos "Antonio") y añadir sufijo
     const usernameCounts = {};
     const usernameMap = miembrosValidos.map((m) => {
       const base = toUsername(m.nombre);
@@ -113,7 +114,7 @@ export async function POST() {
     const rows = await Promise.all(
       usuarios.map(async ({ member, username }) => {
         const hash = hashPassword(defaultPassword);
-        const isAdmin = PAGE_ADMIN_IDS.includes(member.id) ? 1 : 0;
+        const isAdmin = PAGE_ADMIN_IDS.includes(member.id);
         await db.query(
           'INSERT INTO users (member_id, username, password_hash, is_admin) VALUES (?, ?, ?, ?)',
           [member.id, username, hash, isAdmin]

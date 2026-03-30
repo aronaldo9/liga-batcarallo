@@ -10,6 +10,15 @@ export async function POST(request, { params }) {
 
     const { id } = await params;
 
+    // Verificar que el usuario no está eliminado
+    const [[user]] = await db.query(
+      'SELECT quiniela_eliminado FROM users WHERE id = ?',
+      [session.id]
+    );
+    if (user?.quiniela_eliminado) {
+      return NextResponse.json({ error: 'Estás eliminado de la quiniela por ausencias' }, { status: 403 });
+    }
+
     // Verificar que la jornada existe y está abierta y no ha pasado el plazo
     const [[jornada]] = await db.query(
       'SELECT id, estado, fecha_limite FROM quiniela_jornadas WHERE id = ?',

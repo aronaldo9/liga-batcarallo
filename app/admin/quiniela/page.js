@@ -178,11 +178,86 @@ function ResultadosForm({ jornada, partidos, onGuardado }) {
   );
 }
 
+function JugadoresPanel() {
+  const [jugadores, setJugadores] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  async function cargar() {
+    setLoading(true);
+    try {
+      const res = await fetch('/api/quiniela/jugadores');
+      const data = await res.json();
+      setJugadores(data.jugadores || []);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => { cargar(); }, []);
+
+  async function toggleEliminado(userId, eliminadoActual) {
+    await fetch('/api/quiniela/jugadores', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ userId, eliminado: !eliminadoActual }),
+    });
+    cargar();
+  }
+
+  if (loading) return <p className="text-gotham-muted text-sm">Cargando...</p>;
+
+  return (
+    <div className="bg-gotham-card border-4 border-batman-yellow overflow-hidden" style={{ boxShadow: '6px 6px 0 #000' }}>
+      <div className="bg-batman-yellow px-5 py-3">
+        <h2 className="font-[family-name:var(--font-bangers)] text-black text-xl tracking-widest uppercase">
+          Estado jugadores
+        </h2>
+      </div>
+      <table className="w-full text-sm">
+        <thead className="bg-black text-gotham-muted uppercase tracking-widest text-xs border-b-2 border-batman-yellow">
+          <tr>
+            <th className="px-4 py-2 text-left">Usuario</th>
+            <th className="px-4 py-2 text-center">Ausencias</th>
+            <th className="px-4 py-2 text-center">Estado</th>
+            <th className="px-4 py-2 text-center">Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          {jugadores.map((j) => (
+            <tr key={j.id} className={`border-t border-gotham-muted ${j.quiniela_eliminado ? 'opacity-50' : ''}`}>
+              <td className="px-4 py-2 font-semibold text-gotham-text">{j.username}</td>
+              <td className="px-4 py-2 text-center text-gotham-muted">{j.ausencias_consecutivas}</td>
+              <td className="px-4 py-2 text-center">
+                {j.quiniela_eliminado
+                  ? <span className="text-red-400 font-bold text-xs uppercase">Eliminado</span>
+                  : <span className="text-green-400 font-bold text-xs uppercase">Activo</span>
+                }
+              </td>
+              <td className="px-4 py-2 text-center">
+                <button
+                  onClick={() => toggleEliminado(j.id, j.quiniela_eliminado)}
+                  className={`text-xs font-bold uppercase tracking-widest px-3 py-1 border transition-colors ${
+                    j.quiniela_eliminado
+                      ? 'border-green-700 text-green-400 hover:bg-green-900'
+                      : 'border-red-700 text-red-400 hover:bg-red-900'
+                  }`}
+                >
+                  {j.quiniela_eliminado ? 'Rehabilitar' : 'Eliminar'}
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
 export default function AdminQuinielaPage() {
   const [jornadas, setJornadas] = useState([]);
   const [partidosPorJornada, setPartidosPorJornada] = useState({});
   const [loading, setLoading] = useState(true);
-  const [tab, setTab] = useState('crear'); // 'crear' | 'resultados'
+  const [tab, setTab] = useState('crear'); // 'crear' | 'resultados' | 'jugadores'
 
   async function cargarJornadas() {
     setLoading(true);
@@ -230,17 +305,21 @@ export default function AdminQuinielaPage() {
 
       {/* Tabs */}
       <div className="flex gap-2 mb-6">
-        {['crear', 'resultados'].map((t) => (
+        {[
+          { key: 'crear', label: 'Nueva jornada' },
+          { key: 'resultados', label: 'Entrar resultados' },
+          { key: 'jugadores', label: 'Jugadores' },
+        ].map(({ key, label }) => (
           <button
-            key={t}
-            onClick={() => setTab(t)}
+            key={key}
+            onClick={() => setTab(key)}
             className={`px-4 py-1 text-sm font-bold uppercase tracking-widest border-2 transition-colors ${
-              tab === t
+              tab === key
                 ? 'bg-batman-yellow text-black border-batman-yellow'
                 : 'border-gotham-muted text-gotham-muted hover:border-batman-yellow'
             }`}
           >
-            {t === 'crear' ? 'Nueva jornada' : 'Entrar resultados'}
+            {label}
           </button>
         ))}
       </div>
@@ -260,6 +339,8 @@ export default function AdminQuinielaPage() {
           </div>
         </div>
       )}
+
+      {tab === 'jugadores' && <JugadoresPanel />}
 
       {tab === 'resultados' && (
         <div className="flex flex-col gap-6">

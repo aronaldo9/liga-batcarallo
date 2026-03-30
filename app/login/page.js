@@ -25,8 +25,7 @@ export default function LoginPage() {
       if (!res.ok) {
         setError(data.error || 'Error al iniciar sesión');
       } else {
-        router.refresh();
-        router.push('/');
+        window.location.href = "/";
       }
     } catch {
       setError('Error de conexión');

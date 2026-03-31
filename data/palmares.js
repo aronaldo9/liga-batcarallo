@@ -1,6 +1,6 @@
 // Palmarés global por temporada (campeón de liga)
 export const palmares = [
-  { temporada: "2024/2025", campeon: "Davor",  equipo: "Ficticius",      puntos: null },
+  { temporada: "2024/2025", campeon: "Davor",  equipo: "Ficticius",      puntos: 1971 },
   { temporada: "2023/2024", campeon: "Aarón",  equipo: "AronConCola",    puntos: 2155 },
   { temporada: "2022/2023", campeon: "Aarón",  equipo: "AronConCola",    puntos: 2094 },
   { temporada: "2021/2022", campeon: "Davor",  equipo: "Ficticius",      puntos: 2069 },
@@ -36,7 +36,7 @@ export const logrosIndividuales = [
       { temporada: "2023/2024", competicion: "Segunda División",          posicion: "Campeón/a" },
       { temporada: "2019/2020", competicion: "Primera División",          posicion: "Campeón/a" },
       { temporada: null,        competicion: "Copa Batcarallo",           posicion: "2º clasificado" },
-      { temporada: null,        competicion: "FA Cup Batcarallo",         posicion: "Campeón/a" },
+      { temporada: "2023/2024", competicion: "FA Cup Batcarallo",         posicion: "Campeón/a" },
       { temporada: "2020",      competicion: "Eurocopa",                  posicion: "2º clasificado" },
       { temporada: "2022",      competicion: "Mundial Catar",             posicion: "5º clasificado" },
     ],
@@ -130,7 +130,7 @@ export const logrosIndividuales = [
     logros: [
       { temporada: "2024/2025", competicion: "Primera División",          posicion: "3er clasificado" },
       { temporada: "2022/2023", competicion: "Primera División",          posicion: "3er clasificado" },
-      { temporada: "2020/2021", competicion: "Primera División",          posicion: "3er clasificado" },
+      { temporada: "2020/2021", competicion: "Segunda División",           posicion: "3er clasificado" },
       { temporada: null,        competicion: "Champions Batcarallo",      posicion: "Campeón/a" },
       { temporada: null,        competicion: "Final Supercopa Batcarallo", posicion: "2º clasificado" },
       { temporada: null,        competicion: "Supercopa Internacional",   posicion: "Campeón/a" },
@@ -164,13 +164,32 @@ export const logrosIndividuales = [
     ],
   },
   { memberId: 40, logros: [] }, // Seko
-  { memberId: 39, logros: [] }, // Mora
-  { memberId: 38, logros: [] }, // Juanfra
-  { memberId: 37, logros: [] }, // Harry
+  { memberId: 39, logros: [
+    { temporada: "2020/2021", competicion: "Copa Batcarallo", posicion: "2º clasificado" },
+  ] }, // Mora
+  { memberId: 38, logros: [
+    { temporada: "2021/2022", competicion: "FA Cup Batcarallo", posicion: "Campeón/a" },
+    { temporada: "2021/2022", competicion: "Segunda División",  posicion: "3er clasificado" },
+    { temporada: "2023/2024", competicion: "FA Cup Batcarallo", posicion: "2º clasificado" },
+  ] }, // Juanfra
+  { memberId: 37, logros: [
+    { temporada: "2021/2022", competicion: "FA Cup Batcarallo", posicion: "2º clasificado" },
+    { temporada: "2023/2024", competicion: "Segunda División",  posicion: "2º clasificado" },
+  ] }, // Harry
   { memberId: 36, logros: [] }, // Antonio (segunda)
-  { memberId: 13, logros: [] }, // David
-  { memberId: 14, logros: [] }, // Ángel
-  { memberId: 45, logros: [] }, // Verdú Team
-  { memberId: 43, logros: [] }, // Isotopos
+  { memberId: 13, logros: [
+    { temporada: "2020/2021", competicion: "Segunda División", posicion: "Campeón/a" },
+    { temporada: "2020/2021", competicion: "Copa Batcarallo",  posicion: "Campeón/a" },
+  ] }, // David
+  { memberId: 14, logros: [
+    { temporada: "2019/2020", competicion: "Primera División", posicion: "2º clasificado" },
+  ] }, // Ángel
+  { memberId: 45, logros: [
+    { temporada: "2022/2023", competicion: "Segunda División", posicion: "Campeón/a" },
+    { temporada: "2022/2023", competicion: "Copa Batcarallo",  posicion: "Campeón/a" },
+  ] }, // Verdú Team
+  { memberId: 43, logros: [
+    { temporada: "2024/2025", competicion: "FA Cup Batcarallo", posicion: "2º clasificado" },
+  ] }, // Isotopos
   { memberId: 44, logros: [] }, // Legendario Cola
 ];

@@ -62,7 +62,7 @@ export default function MiembrosPage() {
       <DivisionHeader title="Segunda División" subtitle="Ascendiendo desde las sombras" />
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
         {segunda.map((m, i) => (
-          <MemberCard key={m.id} miembro={{ ...m, titulos: getTitulos(m.id) }} logros={getLogros(m.id)} index={i} flippable={false} />
+          <MemberCard key={m.id} miembro={{ ...m, titulos: getTitulos(m.id) }} logros={getLogros(m.id)} index={i} />
         ))}
       </div>
     </div>

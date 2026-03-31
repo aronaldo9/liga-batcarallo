@@ -1,12 +1,12 @@
 // Palmarés global por temporada (campeón de liga)
 export const palmares = [
-  { temporada: "2024/2025", campeon: "Davor",  equipo: "Ficticius" },
-  { temporada: "2023/2024", campeon: "Aarón",  equipo: "AronConCola" },
-  { temporada: "2022/2023", campeon: "Aarón",  equipo: "AronConCola" },
-  { temporada: "2021/2022", campeon: "Davor",  equipo: "Ficticius" },
-  { temporada: "2020/2021", campeon: "Davor",  equipo: "Ficticius" },
-  { temporada: "2019/2020", campeon: "Davor",  equipo: "Ficticius" },
-  { temporada: "2018/2019", campeon: "Aarón",  equipo: "AronConCola" },
+  { temporada: "2024/2025", campeon: "Davor",  equipo: "Ficticius",      puntos: null },
+  { temporada: "2023/2024", campeon: "Aarón",  equipo: "AronConCola",    puntos: 2155 },
+  { temporada: "2022/2023", campeon: "Aarón",  equipo: "AronConCola",    puntos: 2094 },
+  { temporada: "2021/2022", campeon: "Davor",  equipo: "Ficticius",      puntos: 2069 },
+  { temporada: "2020/2021", campeon: "Davor",  equipo: "Ficticius",      puntos: 2104 },
+  { temporada: "2019/2020", campeon: "Davor",  equipo: "Ficticius",      puntos: 1571 },
+  { temporada: "2018/2019", campeon: "Aarón",  equipo: "AronConCola",    puntos: null },
 ];
 
 // Logros individuales por jugador (memberId = id en miembros.js)

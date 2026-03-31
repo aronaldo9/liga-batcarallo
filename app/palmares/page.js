@@ -76,6 +76,7 @@ export default function PalmaresPage() {
               <th className="px-6 py-3 text-left">Temporada</th>
               <th className="px-6 py-3 text-left">Campeón</th>
               <th className="px-6 py-3 text-left hidden sm:table-cell">Equipo</th>
+              <th className="px-6 py-3 text-right hidden sm:table-cell">Puntos</th>
             </tr>
           </thead>
           <tbody>
@@ -92,6 +93,9 @@ export default function PalmaresPage() {
                   {p.campeon}
                 </td>
                 <td className="px-6 py-4 text-gotham-muted hidden sm:table-cell">{p.equipo}</td>
+                <td className="px-6 py-4 text-right font-mono hidden sm:table-cell text-gotham-muted">
+                  {p.puntos ?? "—"}
+                </td>
               </tr>
             ))}
           </tbody>

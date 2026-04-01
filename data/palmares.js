@@ -176,7 +176,9 @@ export const logrosIndividuales = [
     { temporada: "2021/2022", competicion: "FA Cup Batcarallo", posicion: "2º clasificado" },
     { temporada: "2023/2024", competicion: "Segunda División",  posicion: "2º clasificado" },
   ] }, // Harry
-  { memberId: 36, logros: [] }, // Antonio (segunda)
+  { memberId: 36, logros: [
+    { temporada: "2025", competicion: "Mundial de Clubes", posicion: "2º clasificado" },
+  ] }, // Antonio (segunda)
   { memberId: 13, logros: [
     { temporada: "2020/2021", competicion: "Segunda División", posicion: "Campeón/a" },
     { temporada: "2020/2021", competicion: "Copa Batcarallo",  posicion: "Campeón/a" },

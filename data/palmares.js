@@ -24,14 +24,13 @@ export const logrosIndividuales = [
     logros: [
       // Primera División
       { temporada: "2024/2025", competicion: "Primera División",          posicion: "Campeón/a" },
-      { temporada: null,        competicion: "Supercopa Batcarallo", posicion: "Campeón/a" },
       { temporada: null,        competicion: "Supercopa Nacional",         posicion: "Campeón/a" },
       { temporada: "2021/2022", competicion: "Primera División",          posicion: "Campeón/a" },
       { temporada: "2020/2021", competicion: "Primera División",          posicion: "Campeón/a" },
       { temporada: "2021/2022", competicion: "Supercopa Batcarallo",      posicion: "Campeón/a" },
       { temporada: null,        competicion: "Champions Batcarallo",      posicion: "Campeón/a" },
       { temporada: null,        competicion: "Copa Batcarallo",           posicion: "2º clasificado" },
-      { temporada: null,        competicion: "Supercopa Batcarallo",      posicion: "Campeón/a" },
+      { temporada: "2023/2024", competicion: "Supercopa Batcarallo",      posicion: "Campeón/a" },
       // Segunda División
       { temporada: "2023/2024", competicion: "Segunda División",          posicion: "Campeón/a" },
       { temporada: "2019/2020", competicion: "Primera División",          posicion: "Campeón/a" },
@@ -163,7 +162,9 @@ export const logrosIndividuales = [
       { temporada: "2025",      competicion: "Mundial de Clubes",  posicion: "3er clasificado" },
     ],
   },
-  { memberId: 40, logros: [] }, // Seko
+  { memberId: 40, logros: [
+    { temporada: "2022/2023", competicion: "Supercopa Batcarallo", posicion: "Campeón/a" },
+  ] }, // Seko
   { memberId: 39, logros: [
     { temporada: "2020/2021", competicion: "Copa Batcarallo", posicion: "2º clasificado" },
   ] }, // Mora

@@ -24,7 +24,7 @@ export const logrosIndividuales = [
     logros: [
       // Primera División
       { temporada: "2024/2025", competicion: "Primera División",          posicion: "Campeón/a" },
-      { temporada: null,        competicion: "Final Supercopa Batcarallo", posicion: "Campeón/a" },
+      { temporada: null,        competicion: "Supercopa Batcarallo", posicion: "Campeón/a" },
       { temporada: null,        competicion: "Supercopa Nacional",         posicion: "Campeón/a" },
       { temporada: "2021/2022", competicion: "Primera División",          posicion: "Campeón/a" },
       { temporada: "2020/2021", competicion: "Primera División",          posicion: "Campeón/a" },
@@ -53,7 +53,7 @@ export const logrosIndividuales = [
       { temporada: "2022/2023", competicion: "Copa Batcarallo",              posicion: "Campeón/a" },
       { temporada: "2023/2024", competicion: "Champions Batcarallo",         posicion: "2º clasificado" },
       { temporada: null,        competicion: "Copa Batcarallo",              posicion: "Campeón/a" },
-      { temporada: null,        competicion: "Final Supercopa Batcarallo",   posicion: "2º clasificado" },
+      { temporada: null,        competicion: "Supercopa Batcarallo",   posicion: "2º clasificado" },
       { temporada: null,        competicion: "Supercopa Semifinal Nacional", posicion: "Campeón/a" },
       { temporada: null,        competicion: "Copa Batcarallo",              posicion: "2º clasificado" },
       { temporada: "2019/2020", competicion: "Primera División",             posicion: "4º clasificado" },
@@ -132,7 +132,7 @@ export const logrosIndividuales = [
       { temporada: "2022/2023", competicion: "Primera División",          posicion: "3er clasificado" },
       { temporada: "2020/2021", competicion: "Segunda División",           posicion: "3er clasificado" },
       { temporada: "2023/2024", competicion: "Champions Batcarallo",      posicion: "Campeón/a" },
-      { temporada: null,        competicion: "Final Supercopa Batcarallo", posicion: "2º clasificado" },
+      { temporada: null,        competicion: "Supercopa Batcarallo", posicion: "2º clasificado" },
       { temporada: null,        competicion: "Supercopa Internacional",   posicion: "Campeón/a" },
     ],
   },
@@ -188,7 +188,7 @@ export const logrosIndividuales = [
   ] }, // Ángel
   { memberId: 45, logros: [
     { temporada: "2022/2023", competicion: "Segunda División", posicion: "Campeón/a" },
-    { temporada: "2022/2023", competicion: "Copa Batcarallo",  posicion: "Campeón/a" },
+    { temporada: "2022/2023", competicion: "Copa Batcarallo",  posicion: "2º clasificado" },
   ] }, // Verdú Team
   { memberId: 43, logros: [
     { temporada: "2024/2025", competicion: "FA Cup Batcarallo", posicion: "2º clasificado" },

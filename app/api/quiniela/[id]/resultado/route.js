@@ -78,14 +78,17 @@ export async function POST(request, { params }) {
     for (const { id: uid } of todosUsuarios) {
       if (participaron.has(uid)) {
         // Participó: resetear ausencias
-        await db.query('UPDATE users SET ausencias_consecutivas = 0 WHERE id = ?', [uid]);
+        await db.query(
+          'UPDATE users SET ausencias_consecutivas = 0 WHERE id = ? AND quiniela_eliminado = FALSE',
+          [uid]
+        );
       } else {
         // No participó: incrementar y eliminar si llega a 3
         await db.query(
           `UPDATE users
            SET ausencias_consecutivas = ausencias_consecutivas + 1,
                quiniela_eliminado = CASE WHEN ausencias_consecutivas + 1 >= 3 THEN TRUE ELSE FALSE END
-           WHERE id = ?`,
+           WHERE id = ? AND quiniela_eliminado = FALSE`,
           [uid]
         );
       }

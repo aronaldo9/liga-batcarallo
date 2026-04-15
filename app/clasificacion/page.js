@@ -7,10 +7,11 @@ export const metadata = { title: 'Clasificación · Liga Batcarallo' };
 
 async function getTotales() {
   const [rows] = await db.query(
-    `SELECT u.member_id, u.username, COALESCE(SUM(r.puntos), 0) AS total_puntos
+    `SELECT u.member_id, u.username,
+            COALESCE(u.puntos_historicos, 0) + COALESCE(SUM(r.puntos), 0) AS total_puntos
      FROM users u
      LEFT JOIN quiniela_resultados r ON r.user_id = u.id
-     GROUP BY u.id, u.member_id, u.username`
+     GROUP BY u.id, u.member_id, u.username, u.puntos_historicos`
   );
   return rows;
 }

@@ -102,6 +102,16 @@ export default async function QuinielaPage() {
         <div className="border-b-4 border-batman-yellow" />
       </div>
 
+      {/* Acceso clasificación */}
+      <div className="mb-6">
+        <Link
+          href="/clasificacion"
+          className="inline-block border-2 border-batman-yellow text-batman-yellow font-bold uppercase tracking-widest text-sm px-4 py-2 hover:bg-batman-yellow hover:text-black transition-colors"
+        >
+          Ver clasificación →
+        </Link>
+      </div>
+
       {/* Jornada activa */}
       {abierta && (
         <Link href={`/quiniela/${abierta.id}`}>

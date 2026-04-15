@@ -13,10 +13,7 @@ export default async function Navbar() {
     { href: '/miembros', label: 'Miembros' },
     { href: '/palmares', label: 'Palmarés' },
     { href: '/normativa', label: 'Normativa' },
-    ...(session ? [
-      { href: '/quiniela', label: 'Quiniela', highlight: true },
-      { href: '/clasificacion', label: 'Clasificación', highlight: true },
-    ] : []),
+    ...(session ? [{ href: '/quiniela', label: 'Quiniela', highlight: true }] : []),
     ...(session?.is_admin ? [{ href: '/admin/quiniela', label: 'Admin', admin: true }] : []),
   ];
 

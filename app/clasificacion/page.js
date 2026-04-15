@@ -35,6 +35,8 @@ async function getPuntosMes() {
 }
 
 async function getVictorias() {
+  // Suma victorias_historicas (meses anteriores a la web) +
+  // victorias calculadas por la DB solo en meses ya cerrados (< mes actual)
   const [rows] = await db.query(
     `WITH monthly_totals AS (
        SELECT r.user_id, u.member_id,
@@ -43,17 +45,24 @@ async function getVictorias() {
        FROM quiniela_resultados r
        JOIN users u ON u.id = r.user_id
        JOIN quiniela_jornadas j ON j.id = r.jornada_id
+       WHERE DATE_TRUNC('month', j.fecha_jornada) < DATE_TRUNC('month', CURRENT_DATE)
        GROUP BY r.user_id, u.member_id, DATE_TRUNC('month', j.fecha_jornada)
      ),
      monthly_max AS (
        SELECT mes, MAX(puntos_mes) AS max_puntos
        FROM monthly_totals
        GROUP BY mes
+     ),
+     db_victorias AS (
+       SELECT mt.member_id, COUNT(*) AS cnt
+       FROM monthly_totals mt
+       JOIN monthly_max mm ON mm.mes = mt.mes AND mm.max_puntos = mt.puntos_mes
+       GROUP BY mt.member_id
      )
-     SELECT mt.member_id, COUNT(*) AS victorias
-     FROM monthly_totals mt
-     JOIN monthly_max mm ON mm.mes = mt.mes AND mm.max_puntos = mt.puntos_mes
-     GROUP BY mt.member_id`
+     SELECT u.member_id,
+            COALESCE(u.victorias_historicas, 0) + COALESCE(dv.cnt, 0) AS victorias
+     FROM users u
+     LEFT JOIN db_victorias dv ON dv.member_id = u.member_id`
   );
   return rows;
 }

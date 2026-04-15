@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import db from '@/lib/db';
 import { getSession } from '@/lib/auth';
+import { miembros } from '@/data/miembros';
 
 export const metadata = { title: 'Quiniela · Liga Batcarallo' };
 
@@ -25,18 +26,22 @@ function estadoBadge(estado) {
   );
 }
 
-async function getRankingMensual() {
+async function getTop3Mes() {
   try {
     const ahora = new Date();
     const [rows] = await db.query(
-      `SELECT u.username, u.member_id, SUM(r.puntos) as puntos
-       FROM quiniela_resultados r
-       JOIN users u ON u.id = r.user_id
-       JOIN quiniela_jornadas j ON j.id = r.jornada_id
-       WHERE EXTRACT(YEAR FROM j.fecha_jornada) = ? AND EXTRACT(MONTH FROM j.fecha_jornada) = ?
-       AND u.quiniela_eliminado = FALSE
-       GROUP BY u.id, u.username, u.member_id
-       ORDER BY puntos DESC`,
+      `SELECT u.member_id, COALESCE(SUM(r.puntos), 0) AS puntos
+       FROM users u
+       LEFT JOIN (
+         SELECT r2.user_id, r2.puntos
+         FROM quiniela_resultados r2
+         JOIN quiniela_jornadas j ON j.id = r2.jornada_id
+         WHERE EXTRACT(YEAR  FROM j.fecha_jornada) = $1
+           AND EXTRACT(MONTH FROM j.fecha_jornada) = $2
+       ) r ON r.user_id = u.id
+       GROUP BY u.id, u.member_id
+       ORDER BY puntos DESC
+       LIMIT 3`,
       [ahora.getFullYear(), ahora.getMonth() + 1]
     );
     return rows;
@@ -45,15 +50,16 @@ async function getRankingMensual() {
   }
 }
 
-async function getPichichi() {
+async function getTop3Total() {
   try {
     const [rows] = await db.query(
-      `SELECT u.username, u.member_id, SUM(r.puntos) as puntos
-       FROM quiniela_resultados r
-       JOIN users u ON u.id = r.user_id
-       WHERE u.quiniela_eliminado = FALSE
-       GROUP BY u.id, u.username, u.member_id
-       ORDER BY puntos DESC`
+      `SELECT u.member_id,
+              COALESCE(u.puntos_historicos, 0) + COALESCE(SUM(r.puntos), 0) AS puntos
+       FROM users u
+       LEFT JOIN quiniela_resultados r ON r.user_id = u.id
+       GROUP BY u.id, u.member_id, u.puntos_historicos
+       ORDER BY puntos DESC
+       LIMIT 3`
     );
     return rows;
   } catch {
@@ -79,7 +85,8 @@ export default async function QuinielaPage() {
     misJornadas = new Set(enviados.map((r) => r.jornada_id));
   }
 
-  const [rankingMensual, pichichi] = await Promise.all([getRankingMensual(), getPichichi()]);
+  const [top3Mes, top3Total] = await Promise.all([getTop3Mes(), getTop3Total()]);
+  const miembrosMap = Object.fromEntries(miembros.map(m => [m.id, m]));
 
   const abierta = jornadas.find((j) => j.estado === 'abierta');
 
@@ -168,27 +175,30 @@ export default async function QuinielaPage() {
         </div>
 
         {/* Rankings */}
-        <div className="flex flex-col gap-6">
-          {/* Ranking mensual */}
+        <div className="flex flex-col gap-4">
+          {/* Top 3 mes */}
           <div
-            className="bg-gotham-card border-4 border-batman-yellow overflow-hidden"
-            style={{ boxShadow: '4px 4px 0 #000' }}
+            className="bg-gotham-card border-2 border-batman-yellow overflow-hidden"
+            style={{ boxShadow: '3px 3px 0 #000' }}
           >
-            <div className="bg-batman-yellow px-4 py-2">
-              <h3 className="font-[family-name:var(--font-bangers)] text-black text-lg tracking-widest uppercase">
+            <div className="bg-batman-yellow px-3 py-1.5 flex items-center justify-between">
+              <h3 className="font-[family-name:var(--font-bangers)] text-black text-base tracking-widest uppercase">
                 Mes actual
               </h3>
+              <Link href="/clasificacion" className="text-black text-xs font-bold uppercase tracking-widest hover:underline">
+                Ver todo →
+              </Link>
             </div>
-            <div className="px-4 py-3">
-              {rankingMensual.length === 0 ? (
+            <div className="px-3 py-2">
+              {top3Mes.length === 0 ? (
                 <p className="text-gotham-muted text-xs">Sin datos este mes.</p>
               ) : (
                 <ol className="flex flex-col gap-1">
-                  {rankingMensual.map((u, i) => (
-                    <li key={u.username} className="flex justify-between text-sm">
+                  {top3Mes.map((u, i) => (
+                    <li key={u.member_id} className="flex justify-between text-sm">
                       <span className="text-gotham-muted">
                         <span className="text-batman-yellow font-bold mr-2">{i + 1}.</span>
-                        {u.username}
+                        {miembrosMap[u.member_id]?.equipo ?? '—'}
                       </span>
                       <span className="font-bold text-batman-yellow">{u.puntos} pts</span>
                     </li>
@@ -198,26 +208,29 @@ export default async function QuinielaPage() {
             </div>
           </div>
 
-          {/* Pichichi de temporada */}
+          {/* Top 3 total */}
           <div
-            className="bg-gotham-card border-4 border-batman-yellow overflow-hidden"
-            style={{ boxShadow: '4px 4px 0 #000' }}
+            className="bg-gotham-card border-2 border-batman-yellow overflow-hidden"
+            style={{ boxShadow: '3px 3px 0 #000' }}
           >
-            <div className="bg-batman-yellow px-4 py-2">
-              <h3 className="font-[family-name:var(--font-bangers)] text-black text-lg tracking-widest uppercase">
+            <div className="bg-batman-yellow px-3 py-1.5 flex items-center justify-between">
+              <h3 className="font-[family-name:var(--font-bangers)] text-black text-base tracking-widest uppercase">
                 Pichichi
               </h3>
+              <Link href="/clasificacion" className="text-black text-xs font-bold uppercase tracking-widest hover:underline">
+                Ver todo →
+              </Link>
             </div>
-            <div className="px-4 py-3">
-              {pichichi.length === 0 ? (
+            <div className="px-3 py-2">
+              {top3Total.length === 0 ? (
                 <p className="text-gotham-muted text-xs">Sin datos.</p>
               ) : (
                 <ol className="flex flex-col gap-1">
-                  {pichichi.map((u, i) => (
-                    <li key={u.username} className="flex justify-between text-sm">
+                  {top3Total.map((u, i) => (
+                    <li key={u.member_id} className="flex justify-between text-sm">
                       <span className="text-gotham-muted">
                         <span className="text-batman-yellow font-bold mr-2">{i + 1}.</span>
-                        {u.username}
+                        {miembrosMap[u.member_id]?.equipo ?? '—'}
                       </span>
                       <span className="font-bold text-batman-yellow">{u.puntos} pts</span>
                     </li>

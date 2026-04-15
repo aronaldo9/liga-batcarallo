@@ -98,8 +98,6 @@ export default async function ClasificacionPage() {
     }))
     .sort((a, b) => b.total_puntos - a.total_puntos);
 
-  const ahora = new Date();
-  const nombreMes = ahora.toLocaleDateString('es-ES', { month: 'long', year: 'numeric' });
 
   return (
     <div>
@@ -146,10 +144,7 @@ export default async function ClasificacionPage() {
               <th className="px-4 py-3 text-center hidden sm:table-cell">
                 Victorias mes
               </th>
-              <th className="px-4 py-3 text-center">
-                <span className="hidden sm:inline">Pts </span>
-                {nombreMes}
-              </th>
+              <th className="px-4 py-3 text-center">Pts mes</th>
             </tr>
           </thead>
           <tbody>

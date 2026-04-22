@@ -13,7 +13,7 @@ export async function POST(request, { params }) {
     const { id } = await params;
 
     const [[jornada]] = await db.query(
-      'SELECT id, estado FROM quiniela_jornadas WHERE id = ?',
+      'SELECT id, estado, fecha_jornada FROM quiniela_jornadas WHERE id = ?',
       [id]
     );
     if (!jornada) return NextResponse.json({ error: 'Jornada no encontrada' }, { status: 404 });
@@ -59,6 +59,21 @@ export async function POST(request, { params }) {
       porUsuario[p.user_id][p.partido_id] = p.pronostico;
     }
 
+    // Detectar cambio de mes y resetear puntos_mes si es necesario
+    const [[ultimaJornada]] = await db.query(
+      `SELECT fecha_jornada FROM quiniela_jornadas
+       WHERE estado = 'con_resultado' AND id != ?
+       ORDER BY fecha_jornada DESC LIMIT 1`,
+      [id]
+    );
+    const mesActual = new Date(jornada.fecha_jornada).toISOString().slice(0, 7);
+    const mesUltima = ultimaJornada
+      ? new Date(ultimaJornada.fecha_jornada).toISOString().slice(0, 7)
+      : null;
+    if (mesUltima && mesActual !== mesUltima) {
+      await db.query('UPDATE users SET puntos_mes = 0');
+    }
+
     // Calcular e insertar puntuaciones
     for (const [userId, pronosticos] of Object.entries(porUsuario)) {
       const puntos = calcularPuntuacion(partidos, pronosticos);
@@ -66,6 +81,10 @@ export async function POST(request, { params }) {
         `INSERT INTO quiniela_resultados (jornada_id, user_id, puntos) VALUES (?, ?, ?)
          ON CONFLICT (jornada_id, user_id) DO UPDATE SET puntos = EXCLUDED.puntos`,
         [id, userId, puntos]
+      );
+      await db.query(
+        `UPDATE users SET puntos_totales = puntos_totales + ?, puntos_mes = puntos_mes + ? WHERE id = ?`,
+        [puntos, puntos, userId]
       );
     }
 

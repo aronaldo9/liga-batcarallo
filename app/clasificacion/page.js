@@ -7,29 +7,14 @@ export const metadata = { title: 'Clasificación · Liga Batcarallo' };
 
 async function getTotales() {
   const [rows] = await db.query(
-    `SELECT u.member_id, u.username,
-            COALESCE(u.puntos_historicos, 0) + COALESCE(SUM(r.puntos), 0) AS total_puntos
-     FROM users u
-     LEFT JOIN quiniela_resultados r ON r.user_id = u.id
-     GROUP BY u.id, u.member_id, u.username, u.puntos_historicos`
+    `SELECT member_id, username, puntos_totales AS total_puntos, puntos_biwenger, valor_mercado FROM users`
   );
   return rows;
 }
 
 async function getPuntosMes() {
-  const ahora = new Date();
   const [rows] = await db.query(
-    `SELECT u.member_id, COALESCE(SUM(r.puntos), 0) AS puntos_mes
-     FROM users u
-     LEFT JOIN (
-       SELECT r2.user_id, r2.puntos
-       FROM quiniela_resultados r2
-       JOIN quiniela_jornadas j ON j.id = r2.jornada_id
-       WHERE EXTRACT(YEAR  FROM j.fecha_jornada) = $1
-         AND EXTRACT(MONTH FROM j.fecha_jornada) = $2
-     ) r ON r.user_id = u.id
-     GROUP BY u.id, u.member_id`,
-    [ahora.getFullYear(), ahora.getMonth() + 1]
+    `SELECT member_id, puntos_mes FROM users`
   );
   return rows;
 }
@@ -88,15 +73,22 @@ export default async function ClasificacionPage() {
 
   const jugadores = totales
     .map(r => ({
-      member_id:    r.member_id,
-      username:     r.username,
-      equipo:       miembrosMap[r.member_id]?.equipo ?? r.username,
-      division:     miembrosMap[r.member_id]?.division ?? 'segunda',
-      total_puntos: Number(r.total_puntos),
-      puntos_mes:   puntosMesMap[r.member_id] ?? 0,
-      victorias:    victoriasMap[r.member_id] ?? 0,
+      member_id:       r.member_id,
+      username:        r.username,
+      equipo:          miembrosMap[r.member_id]?.equipo ?? r.username,
+      division:        miembrosMap[r.member_id]?.division ?? 'segunda',
+      total_puntos:    Number(r.total_puntos),
+      puntos_mes:      puntosMesMap[r.member_id] ?? 0,
+      victorias:       victoriasMap[r.member_id] ?? 0,
+      puntos_biwenger: r.puntos_biwenger ?? null,
+      valor_mercado:   r.valor_mercado ?? null,
     }))
-    .sort((a, b) => b.total_puntos - a.total_puntos);
+    .sort((a, b) =>
+      b.total_puntos - a.total_puntos ||
+      b.victorias - a.victorias ||
+      (b.puntos_biwenger ?? -Infinity) - (a.puntos_biwenger ?? -Infinity) ||
+      (b.valor_mercado ?? -Infinity) - (a.valor_mercado ?? -Infinity)
+    );
 
 
   return (
@@ -141,10 +133,10 @@ export default async function ClasificacionPage() {
               <th className="px-4 py-3 text-left w-10">#</th>
               <th className="px-4 py-3 text-left">Equipo</th>
               <th className="px-4 py-3 text-center">Pts totales</th>
-              <th className="px-4 py-3 text-center hidden sm:table-cell">
-                Victorias mes
-              </th>
+              <th className="px-4 py-3 text-center hidden sm:table-cell">Victorias mes</th>
               <th className="px-4 py-3 text-center">Pts mes</th>
+              <th className="px-4 py-3 text-center hidden md:table-cell">Pts Biwenger</th>
+              <th className="px-4 py-3 text-center hidden md:table-cell">Valor mercado</th>
             </tr>
           </thead>
           <tbody>
@@ -180,6 +172,16 @@ export default async function ClasificacionPage() {
                   <td className="px-4 py-3 text-center font-bold tabular-nums">
                     {j.puntos_mes > 0 ? j.puntos_mes : (
                       <span className={esPrimera ? 'text-black/50' : 'text-gotham-muted'}>0</span>
+                    )}
+                  </td>
+                  <td className="px-4 py-3 text-center hidden md:table-cell tabular-nums">
+                    {j.puntos_biwenger != null ? j.puntos_biwenger : (
+                      <span className={esPrimera ? 'text-black/50' : 'text-gotham-muted'}>—</span>
+                    )}
+                  </td>
+                  <td className="px-4 py-3 text-center hidden md:table-cell tabular-nums">
+                    {j.valor_mercado != null ? `${j.valor_mercado}M` : (
+                      <span className={esPrimera ? 'text-black/50' : 'text-gotham-muted'}>—</span>
                     )}
                   </td>
                 </tr>

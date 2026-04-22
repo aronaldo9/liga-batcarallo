@@ -28,21 +28,8 @@ function estadoBadge(estado) {
 
 async function getTop3Mes() {
   try {
-    const ahora = new Date();
     const [rows] = await db.query(
-      `SELECT u.member_id, COALESCE(SUM(r.puntos), 0) AS puntos
-       FROM users u
-       LEFT JOIN (
-         SELECT r2.user_id, r2.puntos
-         FROM quiniela_resultados r2
-         JOIN quiniela_jornadas j ON j.id = r2.jornada_id
-         WHERE EXTRACT(YEAR  FROM j.fecha_jornada) = $1
-           AND EXTRACT(MONTH FROM j.fecha_jornada) = $2
-       ) r ON r.user_id = u.id
-       GROUP BY u.id, u.member_id
-       ORDER BY puntos DESC
-       LIMIT 3`,
-      [ahora.getFullYear(), ahora.getMonth() + 1]
+      `SELECT member_id, puntos_mes AS puntos FROM users ORDER BY puntos_mes DESC LIMIT 3`
     );
     return rows;
   } catch {
@@ -53,13 +40,7 @@ async function getTop3Mes() {
 async function getTop3Total() {
   try {
     const [rows] = await db.query(
-      `SELECT u.member_id,
-              COALESCE(u.puntos_historicos, 0) + COALESCE(SUM(r.puntos), 0) AS puntos
-       FROM users u
-       LEFT JOIN quiniela_resultados r ON r.user_id = u.id
-       GROUP BY u.id, u.member_id, u.puntos_historicos
-       ORDER BY puntos DESC
-       LIMIT 3`
+      `SELECT member_id, puntos_totales AS puntos FROM users ORDER BY puntos_totales DESC LIMIT 3`
     );
     return rows;
   } catch {

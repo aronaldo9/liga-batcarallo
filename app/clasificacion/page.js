@@ -134,9 +134,9 @@ export default async function ClasificacionPage() {
               <th className="px-4 py-3 text-left">Equipo</th>
               <th className="px-4 py-3 text-center">Pts totales</th>
               <th className="px-4 py-3 text-center hidden sm:table-cell">Victorias mes</th>
-              <th className="px-4 py-3 text-center">Pts mes</th>
               <th className="px-4 py-3 text-center hidden md:table-cell">Pts Biwenger</th>
               <th className="px-4 py-3 text-center hidden md:table-cell">Valor mercado</th>
+              <th className="px-4 py-3 text-center">Pts mes</th>
             </tr>
           </thead>
           <tbody>
@@ -169,11 +169,6 @@ export default async function ClasificacionPage() {
                       <span className={esPrimera ? 'text-black/50' : 'text-gotham-muted'}>—</span>
                     )}
                   </td>
-                  <td className="px-4 py-3 text-center font-bold tabular-nums">
-                    {j.puntos_mes > 0 ? j.puntos_mes : (
-                      <span className={esPrimera ? 'text-black/50' : 'text-gotham-muted'}>0</span>
-                    )}
-                  </td>
                   <td className="px-4 py-3 text-center hidden md:table-cell tabular-nums">
                     {j.puntos_biwenger != null ? j.puntos_biwenger : (
                       <span className={esPrimera ? 'text-black/50' : 'text-gotham-muted'}>—</span>
@@ -182,6 +177,11 @@ export default async function ClasificacionPage() {
                   <td className="px-4 py-3 text-center hidden md:table-cell tabular-nums">
                     {j.valor_mercado != null ? `${j.valor_mercado}M` : (
                       <span className={esPrimera ? 'text-black/50' : 'text-gotham-muted'}>—</span>
+                    )}
+                  </td>
+                  <td className="px-4 py-3 text-center font-bold tabular-nums">
+                    {j.puntos_mes > 0 ? j.puntos_mes : (
+                      <span className={esPrimera ? 'text-black/50' : 'text-gotham-muted'}>0</span>
                     )}
                   </td>
                 </tr>

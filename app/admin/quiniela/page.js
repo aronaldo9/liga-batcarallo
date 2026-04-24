@@ -181,6 +181,10 @@ function ResultadosForm({ jornada, partidos, onGuardado }) {
 function JugadoresPanel() {
   const [jugadores, setJugadores] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [resetId, setResetId] = useState(null);
+  const [resetPass, setResetPass] = useState('');
+  const [resetError, setResetError] = useState('');
+  const [resetOk, setResetOk] = useState(false);
 
   async function cargar() {
     setLoading(true);
@@ -204,6 +208,40 @@ function JugadoresPanel() {
     cargar();
   }
 
+  function abrirReset(id) {
+    setResetId(id);
+    setResetPass('');
+    setResetError('');
+    setResetOk(false);
+  }
+
+  function cerrarReset() {
+    setResetId(null);
+    setResetPass('');
+    setResetError('');
+    setResetOk(false);
+  }
+
+  async function handleResetPassword(userId) {
+    setResetError('');
+    if (!resetPass || resetPass.length < 8) {
+      setResetError('Mínimo 8 caracteres');
+      return;
+    }
+    const res = await fetch('/api/admin/password', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ userId, password: resetPass }),
+    });
+    if (res.ok) {
+      setResetOk(true);
+      setTimeout(cerrarReset, 1500);
+    } else {
+      const data = await res.json();
+      setResetError(data.error || 'Error');
+    }
+  }
+
   if (loading) return <p className="text-gotham-muted text-sm">Cargando...</p>;
 
   return (
@@ -219,12 +257,13 @@ function JugadoresPanel() {
             <th className="px-4 py-2 text-left">Usuario</th>
             <th className="px-4 py-2 text-center">Ausencias</th>
             <th className="px-4 py-2 text-center">Estado</th>
-            <th className="px-4 py-2 text-center">Acción</th>
+            <th className="px-4 py-2 text-center">Quiniela</th>
+            <th className="px-4 py-2 text-center">Contraseña</th>
           </tr>
         </thead>
         <tbody>
           {jugadores.map((j) => (
-            <tr key={j.id} className={`border-t border-gotham-muted ${j.quiniela_eliminado ? 'opacity-50' : ''}`}>
+            <tr key={j.id} className={`border-t border-gotham-muted ${j.quiniela_eliminado ? 'opacity-60' : ''}`}>
               <td className="px-4 py-2 font-semibold text-gotham-text">{j.username}</td>
               <td className="px-4 py-2 text-center text-gotham-muted">{j.ausencias_consecutivas}</td>
               <td className="px-4 py-2 text-center">
@@ -244,6 +283,44 @@ function JugadoresPanel() {
                 >
                   {j.quiniela_eliminado ? 'Rehabilitar' : 'Eliminar'}
                 </button>
+              </td>
+              <td className="px-4 py-2 text-center">
+                {resetId === j.id ? (
+                  <div className="flex flex-col gap-1 items-center">
+                    <div className="flex gap-1">
+                      <input
+                        type="password"
+                        value={resetPass}
+                        onChange={(e) => setResetPass(e.target.value)}
+                        placeholder="Nueva contraseña"
+                        className="bg-black border border-gotham-muted focus:border-batman-yellow outline-none px-2 py-1 text-gotham-text text-xs w-36"
+                        onKeyDown={(e) => e.key === 'Enter' && handleResetPassword(j.id)}
+                      />
+                      <button
+                        onClick={() => handleResetPassword(j.id)}
+                        className="text-xs font-bold uppercase px-2 py-1 border border-batman-yellow text-batman-yellow hover:bg-batman-yellow hover:text-black transition-colors"
+                      >
+                        {resetOk ? '✓' : 'OK'}
+                      </button>
+                      <button
+                        onClick={cerrarReset}
+                        className="text-xs font-bold uppercase px-2 py-1 border border-gotham-muted text-gotham-muted hover:border-red-700 transition-colors"
+                      >
+                        ✕
+                      </button>
+                    </div>
+                    {resetError && (
+                      <p className="text-red-400 text-xs">{resetError}</p>
+                    )}
+                  </div>
+                ) : (
+                  <button
+                    onClick={() => abrirReset(j.id)}
+                    className="text-xs font-bold uppercase tracking-widest px-3 py-1 border border-gotham-muted text-gotham-muted hover:border-batman-yellow hover:text-batman-yellow transition-colors"
+                  >
+                    Reset pass
+                  </button>
+                )}
               </td>
             </tr>
           ))}

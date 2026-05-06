@@ -102,11 +102,13 @@ export async function POST(request, { params }) {
           [uid]
         );
       } else {
-        // No participó: incrementar y eliminar si llega a 3
+        // No participó: incrementar y eliminar si llega a 3 (zerear puntos al eliminar)
         await db.query(
           `UPDATE users
            SET ausencias_consecutivas = ausencias_consecutivas + 1,
-               quiniela_eliminado = CASE WHEN ausencias_consecutivas + 1 >= 3 THEN TRUE ELSE FALSE END
+               quiniela_eliminado = CASE WHEN ausencias_consecutivas + 1 >= 3 THEN TRUE ELSE FALSE END,
+               puntos_totales = CASE WHEN ausencias_consecutivas + 1 >= 3 THEN 0 ELSE puntos_totales END,
+               puntos_mes = CASE WHEN ausencias_consecutivas + 1 >= 3 THEN 0 ELSE puntos_mes END
            WHERE id = ? AND quiniela_eliminado = FALSE`,
           [uid]
         );

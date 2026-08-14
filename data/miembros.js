@@ -24,8 +24,8 @@ export const miembros = [
   { id: 32, nombre: "Kike",              equipo: "Kikebiri",               temporadas: 4,  titulos: 0, division: "segunda", imagen: "/gordon.png",  apodo: "El Biri" },
   { id: 30, nombre: "Elvira",            equipo: "Lideresa",               temporadas: 7,  titulos: 0, division: "segunda", imagen: "/harley.png" },
   { id: 28, nombre: "Jorge",             equipo: "Tupac",                  temporadas: 6,  titulos: 0, division: "segunda", imagen: "/mrfreeze.jpg", apodo: "El Cizañero" },
-  { id: 41, nombre: "Vacante",           equipo: "—",                      temporadas: 0,  titulos: 0, division: "segunda", imagen: "/skyline.png" },
-  { id: 42, nombre: "Vacante",           equipo: "—",                      temporadas: 0,  titulos: 0, division: "segunda", imagen: "/skyline.png" },
+  { id: 41, nombre: "Vicent",            equipo: "Vicent",                 temporadas: 1,  titulos: 0, division: "segunda", imagen: "/skyline.png" },
+  { id: 42, nombre: "Vicent",            equipo: "Los Vicens",             temporadas: 1,  titulos: 0, division: "segunda", imagen: "/skyline.png" },
 ];
 
 export const primera = miembros.filter((m) => m.division === "primera");

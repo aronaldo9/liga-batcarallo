@@ -75,7 +75,7 @@ export const normativa = [
     tipo: "normal",
     reglas: [
       "Hay que pronosticar 3 partidos en formato 1X2: 2 simples y 1 partido de jornada. Si alguno se suspende, el admin designará un sustituto durante la jornada.",
-      "Los partidos se publicarán en el grupo de WhatsApp antes de empezar la jornada. Los pronósticos se envían por WhatsApp privado al admin David dentro del plazo indicado para cada jornada.",
+      "Los partidos se publicarán en el grupo de WhatsApp antes de empezar la jornada. Esta temporada los pronósticos solo se admiten a través de la web, dentro del plazo indicado para cada jornada; no se aceptarán pronósticos por WhatsApp.",
       "Puntuación: 20 puntos por acertar 1 partido simple · 50 puntos por 2 simples · 100 puntos por los 2 simples más el partido de jornada (el partido de jornada no cuenta por sí solo).",
       "10.000 por punto al término de cada quiniela.",
       "Clasificación mensual: se suman los puntos de las quinielas del mes. El ganador mensual recibe 1.000.000 extra. En caso de empate, el premio se reparte a partes iguales y se anota una victoria mensual para todos los empatados.",

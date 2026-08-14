@@ -1,5 +1,6 @@
 // Palmarés global por temporada (campeón de liga)
 export const palmares = [
+  { temporada: "2025/2026", campeon: "Alfonso", equipo: "Gandalf El Blanco", puntos: null },
   { temporada: "2024/2025", campeon: "Davor",  equipo: "Ficticius",      puntos: 1971 },
   { temporada: "2023/2024", campeon: "Aarón",  equipo: "AronConCola",    puntos: 2155 },
   { temporada: "2022/2023", campeon: "Aarón",  equipo: "AronConCola",    puntos: 2094 },
@@ -14,6 +15,9 @@ export const logrosIndividuales = [
   {
     memberId: 31, // Alfonso — Gandalf el Blanco
     logros: [
+      { temporada: "2025/2026", competicion: "Primera División",     posicion: "Campeón/a" },
+      { temporada: "2025/2026", competicion: "Copa Batcarallo",      posicion: "Campeón/a" },
+      { temporada: "2025/2026", competicion: "Champions Batcarallo", posicion: "Campeón/a" },
       { temporada: "2024/2025", competicion: "Primera División", posicion: "6º clasificado" },
       { temporada: "2023/2024", competicion: "Segunda División", posicion: "3er clasificado" },
       { temporada: "2025",      competicion: "Mundial de Clubes", posicion: "5º clasificado" },
@@ -23,6 +27,9 @@ export const logrosIndividuales = [
     memberId: 1, // Davor — Ficticius
     logros: [
       // Primera División
+      { temporada: "2025/2026", competicion: "Primera División",          posicion: "2º clasificado" },
+      { temporada: "2025/2026", competicion: "Supercopa Nacional",        posicion: "Campeón/a" },
+      { temporada: "2025/2026", competicion: "Champions Batcarallo",      posicion: "2º clasificado" },
       { temporada: "2024/2025", competicion: "Primera División",          posicion: "Campeón/a" },
       { temporada: null,        competicion: "Supercopa Batcarallo",         posicion: "Campeón/a" },
       { temporada: "2021/2022", competicion: "Primera División",          posicion: "Campeón/a" },
@@ -43,6 +50,7 @@ export const logrosIndividuales = [
   {
     memberId: 26, // Aarón — AronConCola
     logros: [
+      { temporada: "2025/2026", competicion: "Primera División",             posicion: "3er clasificado" },
       { temporada: "2023/2024", competicion: "Primera División",             posicion: "Campeón/a" },
       { temporada: "2022/2023", competicion: "Primera División",             posicion: "Campeón/a" },
       { temporada: "2018/2019", competicion: "Primera División",             posicion: "Campeón/a" },
@@ -128,6 +136,8 @@ export const logrosIndividuales = [
   {
     memberId: 30, // Elvira — Lideresa
     logros: [
+      { temporada: "2025/2026", competicion: "Supercopa Internacional",   posicion: "2º clasificado" },
+      { temporada: "2025/2026", competicion: "Supercopa Nacional",        posicion: "2º clasificado" },
       { temporada: "2024/2025", competicion: "Primera División",          posicion: "3er clasificado" },
       { temporada: "2022/2023", competicion: "Primera División",          posicion: "3er clasificado" },
       { temporada: "2020/2021", competicion: "Segunda División",           posicion: "3er clasificado" },
@@ -156,6 +166,7 @@ export const logrosIndividuales = [
   {
     memberId: 27, // Paco — Enuma Elish
     logros: [
+      { temporada: "2025/2026", competicion: "Copa Batcarallo",    posicion: "2º clasificado" },
       { temporada: "2022/2023", competicion: "Primera División",   posicion: "4º clasificado" },
       { temporada: "2021/2022", competicion: "Primera División",   posicion: "5º clasificado" },
       { temporada: "2020/2021", competicion: "Primera División",   posicion: "4º clasificado" },
@@ -171,6 +182,7 @@ export const logrosIndividuales = [
     { temporada: "2020/2021", competicion: "Copa Batcarallo", posicion: "2º clasificado" },
   ] }, // Mora
   { memberId: 38, logros: [
+    { temporada: "2025/2026", competicion: "FA Cup Batcarallo", posicion: "2º clasificado" },
     { temporada: "2021/2022", competicion: "FA Cup Batcarallo", posicion: "Campeón/a" },
     { temporada: "2021/2022", competicion: "Copa Batcarallo",   posicion: "Campeón/a" },
     { temporada: "2021/2022", competicion: "Segunda División",  posicion: "3er clasificado" },
@@ -181,9 +193,12 @@ export const logrosIndividuales = [
     { temporada: "2023/2024", competicion: "Segunda División",  posicion: "2º clasificado" },
   ] }, // Harry
   { memberId: 36, logros: [
-    { temporada: "2025", competicion: "Mundial de Clubes", posicion: "2º clasificado" },
+    { temporada: "2025/2026", competicion: "Segunda División",  posicion: "Campeón/a" },
+    { temporada: "2025/2026", competicion: "FA Cup Batcarallo", posicion: "Campeón/a" },
+    { temporada: "2025",      competicion: "Mundial de Clubes", posicion: "2º clasificado" },
   ] }, // Antonio (segunda)
   { memberId: 13, logros: [
+    { temporada: "2025/2026", competicion: "Supercopa Internacional", posicion: "Campeón/a" },
     { temporada: "2020/2021", competicion: "Segunda División", posicion: "Campeón/a" },
     { temporada: "2020/2021", competicion: "Copa Batcarallo",  posicion: "Campeón/a" },
   ] }, // David

@@ -1,7 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import db from "@/lib/db";
-import { palmares } from "@/data/palmares";
+import { palmares, logrosIndividuales } from "@/data/palmares";
+import { miembros } from "@/data/miembros";
 
 const sections = [
   {
@@ -53,8 +54,31 @@ async function getQuinielaInfo() {
   }
 }
 
+function getChampion(competicion) {
+  let best = null;
+  for (const { memberId, logros } of logrosIndividuales) {
+    for (const logro of logros) {
+      if (logro.competicion !== competicion || logro.posicion !== "Campeón/a" || !logro.temporada) continue;
+      if (!best || logro.temporada > best.temporada) best = { memberId, temporada: logro.temporada };
+    }
+  }
+  if (!best) return null;
+  const miembro = miembros.find((m) => m.id === best.memberId);
+  if (!miembro) return null;
+  return { nombre: miembro.nombre, equipo: miembro.equipo, temporada: best.temporada };
+}
+
+const OTROS_TITULOS = [
+  { label: "Segunda División", competicion: "Segunda División" },
+  { label: "Copa Batcarallo", competicion: "Copa Batcarallo" },
+  { label: "Champions Batcarallo", competicion: "Champions Batcarallo" },
+];
+
 export default async function Home() {
   const campeon = palmares[0] ?? null;
+  const otrosCampeones = OTROS_TITULOS
+    .map((t) => ({ ...t, data: getChampion(t.competicion) }))
+    .filter((t) => t.data);
   const quiniela = await getQuinielaInfo();
 
   return (
@@ -187,6 +211,34 @@ export default async function Home() {
           </Link>
         )}
       </section>
+
+      {/* Otros campeones de la temporada */}
+      {otrosCampeones.length > 0 && (
+        <section>
+          <h2 className="font-[family-name:var(--font-bangers)] text-gotham-text text-3xl tracking-widest mb-6 text-center">
+            — Campeones {campeon?.temporada} —
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            {otrosCampeones.map((t) => (
+              <div
+                key={t.competicion}
+                className="bg-gotham-card border-4 border-gotham-border p-5"
+                style={{ boxShadow: "6px 6px 0 #000" }}
+              >
+                <p className="text-batman-yellow text-xs font-black uppercase tracking-widest mb-1">
+                  🏆 {t.label}
+                </p>
+                <p className="font-[family-name:var(--font-bangers)] text-gotham-text text-2xl tracking-widest leading-none">
+                  {t.data.nombre}
+                </p>
+                <p className="text-gotham-muted text-xs font-bold uppercase tracking-widest mt-1">
+                  {t.data.equipo}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* Skyline */}
       <div className="relative -mx-4 overflow-hidden">

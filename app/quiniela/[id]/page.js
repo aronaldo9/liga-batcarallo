@@ -142,23 +142,28 @@ export default async function QuinielaDetallePage({ params }) {
           </div>
 
           {/* Formulario o estado del pronóstico */}
-          {abiertaYEnPlazo && !yaEnvie && (
+          {abiertaYEnPlazo && (
             <div
               className="bg-gotham-card border-4 border-batman-yellow overflow-hidden"
               style={{ boxShadow: '6px 6px 0 #000' }}
             >
               <div className="bg-batman-yellow px-5 py-3">
                 <h2 className="font-[family-name:var(--font-bangers)] text-black text-xl tracking-widest uppercase">
-                  Tu pronóstico
+                  Tu pronóstico{yaEnvie && ' ✓'}
                 </h2>
               </div>
               <div className="px-5 py-5">
-                <PronosticoForm jornadaId={jornada.id} partidos={partidos} />
+                {yaEnvie && (
+                  <p className="text-gotham-muted text-xs mb-4">
+                    Ya enviaste tu pronóstico. Puedes modificarlo mientras no termine el plazo.
+                  </p>
+                )}
+                <PronosticoForm jornadaId={jornada.id} partidos={partidos} valorInicial={miPronostico} />
               </div>
             </div>
           )}
 
-          {yaEnvie && (
+          {!abiertaYEnPlazo && yaEnvie && (
             <div
               className="bg-gotham-card border-4 border-batman-yellow overflow-hidden"
               style={{ boxShadow: '6px 6px 0 #000' }}

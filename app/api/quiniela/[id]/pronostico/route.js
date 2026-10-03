@@ -32,15 +32,6 @@ export async function POST(request, { params }) {
       return NextResponse.json({ error: 'El plazo de pronósticos ha terminado' }, { status: 400 });
     }
 
-    // Verificar que el usuario no ha enviado ya pronóstico
-    const [existing] = await db.query(
-      'SELECT id FROM quiniela_pronosticos WHERE jornada_id = ? AND user_id = ? LIMIT 1',
-      [id, session.id]
-    );
-    if (existing.length > 0) {
-      return NextResponse.json({ error: 'Ya enviaste tu pronóstico para esta jornada' }, { status: 409 });
-    }
-
     // pronosticos: { [partido_id]: '1'|'X'|'2' }
     const { pronosticos } = await request.json();
     if (!pronosticos || typeof pronosticos !== 'object') {
@@ -62,7 +53,8 @@ export async function POST(request, { params }) {
         return NextResponse.json({ error: 'Valor de pronóstico inválido' }, { status: 400 });
       }
       await db.query(
-        'INSERT INTO quiniela_pronosticos (jornada_id, user_id, partido_id, pronostico) VALUES (?, ?, ?, ?)',
+        `INSERT INTO quiniela_pronosticos (jornada_id, user_id, partido_id, pronostico) VALUES (?, ?, ?, ?)
+         ON CONFLICT (user_id, partido_id) DO UPDATE SET pronostico = EXCLUDED.pronostico`,
         [id, session.id, partido.id, p]
       );
     }

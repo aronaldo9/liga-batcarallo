@@ -5,13 +5,14 @@ import { useRouter } from 'next/navigation';
 
 const OPCIONES = ['1', 'X', '2'];
 
-export default function PronosticoForm({ jornadaId, partidos }) {
+export default function PronosticoForm({ jornadaId, partidos, valorInicial = {} }) {
   const router = useRouter();
-  const [seleccion, setSeleccion] = useState({});
+  const [seleccion, setSeleccion] = useState(valorInicial);
   const [enviando, setEnviando] = useState(false);
   const [error, setError] = useState('');
 
   const todosSeleccionados = partidos.every((p) => seleccion[p.id]);
+  const editando = Object.keys(valorInicial).length > 0;
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -89,7 +90,7 @@ export default function PronosticoForm({ jornadaId, partidos }) {
         disabled={!todosSeleccionados || enviando}
         className="bg-batman-yellow text-black font-black uppercase tracking-widest text-sm py-2 px-6 hover:bg-white transition-colors disabled:opacity-40 disabled:cursor-not-allowed self-start"
       >
-        {enviando ? 'Enviando...' : 'Enviar pronóstico'}
+        {enviando ? 'Enviando...' : editando ? 'Actualizar pronóstico' : 'Enviar pronóstico'}
       </button>
     </form>
   );

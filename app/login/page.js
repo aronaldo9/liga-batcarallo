@@ -8,6 +8,7 @@ export default function LoginPage() {
   const router = useRouter();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [verPassword, setVerPassword] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -75,14 +76,23 @@ export default function LoginPage() {
             <label className="text-xs font-bold uppercase tracking-widest text-batman-yellow">
               Contraseña
             </label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              autoComplete="current-password"
-              className="bg-black border-2 border-gotham-muted focus:border-batman-yellow outline-none px-3 py-2 text-gotham-text text-sm transition-colors"
-            />
+            <div className="relative">
+              <input
+                type={verPassword ? 'text' : 'password'}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                autoComplete="current-password"
+                className="bg-black border-2 border-gotham-muted focus:border-batman-yellow outline-none px-3 py-2 pr-16 text-gotham-text text-sm transition-colors w-full"
+              />
+              <button
+                type="button"
+                onClick={() => setVerPassword((v) => !v)}
+                className="absolute right-2 top-1/2 -translate-y-1/2 text-gotham-muted hover:text-batman-yellow text-xs font-bold uppercase tracking-wider"
+              >
+                {verPassword ? 'Ocultar' : 'Ver'}
+              </button>
+            </div>
           </div>
 
           {error && (

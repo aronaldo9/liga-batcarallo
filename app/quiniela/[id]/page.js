@@ -158,7 +158,12 @@ export default async function QuinielaDetallePage({ params }) {
                     Ya enviaste tu pronóstico. Puedes modificarlo mientras no termine el plazo.
                   </p>
                 )}
-                <PronosticoForm jornadaId={jornada.id} partidos={partidos} valorInicial={miPronostico} />
+                <PronosticoForm
+                  jornadaId={jornada.id}
+                  partidos={partidos}
+                  valorInicial={miPronostico}
+                  fechaLimite={jornada.fecha_limite}
+                />
               </div>
             </div>
           )}

@@ -1,22 +1,46 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 const OPCIONES = ['1', 'X', '2'];
 
-export default function PronosticoForm({ jornadaId, partidos, valorInicial = {} }) {
+export default function PronosticoForm({ jornadaId, partidos, valorInicial = {}, fechaLimite }) {
   const router = useRouter();
   const [seleccion, setSeleccion] = useState(valorInicial);
   const [enviando, setEnviando] = useState(false);
   const [error, setError] = useState('');
+  const [plazoVencido, setPlazoVencido] = useState(
+    () => !!fechaLimite && Date.now() > new Date(fechaLimite).getTime()
+  );
+
+  // Revisa el plazo mientras la página sigue abierta, sin depender de recargarla
+  useEffect(() => {
+    if (!fechaLimite || plazoVencido) return;
+    const limite = new Date(fechaLimite).getTime();
+    const id = setInterval(() => {
+      if (Date.now() > limite) {
+        setPlazoVencido(true);
+        clearInterval(id);
+      }
+    }, 15000);
+    return () => clearInterval(id);
+  }, [fechaLimite, plazoVencido]);
 
   const todosSeleccionados = partidos.every((p) => seleccion[p.id]);
   const editando = Object.keys(valorInicial).length > 0;
 
+  if (plazoVencido) {
+    return (
+      <p className="text-red-400 text-sm font-bold border border-red-800 bg-red-950 px-4 py-3">
+        ⚠ El plazo de pronósticos ha terminado.
+      </p>
+    );
+  }
+
   async function handleSubmit(e) {
     e.preventDefault();
-    if (!todosSeleccionados) return;
+    if (!todosSeleccionados || plazoVencido) return;
     setError('');
     setEnviando(true);
     try {

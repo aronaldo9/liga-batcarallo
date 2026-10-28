@@ -81,7 +81,7 @@ export default function MemberCard({ miembro, logros = [], index, priority = fal
               priority={priority}
               onError={() => setImgSrc("/skyline.png")}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-gotham-card via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-linear-to-t from-gotham-card via-transparent to-transparent" />
             {miembro.titulos > 0 && (
               <span className="absolute top-2 right-2 bg-batman-yellow text-black text-xs font-black px-2 py-1 uppercase tracking-wider">
                 🏆 ×{miembro.titulos}

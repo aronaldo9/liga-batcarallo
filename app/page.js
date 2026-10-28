@@ -92,7 +92,7 @@ export default async function Home() {
           style={{ clipPath: "polygon(0 30%, 100% 10%, 100% 70%, 0 90%)" }}
         />
         <div className="relative z-10 py-12 px-8 text-center flex flex-col items-center">
-          <div className="inline-block border-2 border-batman-yellow px-4 py-1 mb-6 rotate-[-1deg]">
+          <div className="inline-block border-2 border-batman-yellow px-4 py-1 mb-6 -rotate-1">
             <span className="text-batman-yellow text-xs font-bold uppercase tracking-widest">
               Liga privada · Biwenger · Gotham City
             </span>
@@ -106,7 +106,7 @@ export default async function Home() {
               alt="Liga Batcarallo"
               width={520}
               height={520}
-              className="object-contain w-full max-w-[320px] sm:max-w-[520px]"
+              className="object-contain w-full max-w-[320px] sm:max-w-130"
               style={{ height: "auto" }}
               priority
             />
@@ -250,7 +250,7 @@ export default async function Home() {
           className="w-full h-auto opacity-40"
           aria-hidden="true"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-gotham-bg via-transparent to-gotham-bg" />
+        <div className="absolute inset-0 bg-linear-to-t from-gotham-bg via-transparent to-gotham-bg" />
       </div>
 
       {/* Nav cards */}

@@ -25,7 +25,7 @@ function ImagePanel({ src, alt, caption, rotate = "0.4deg", objectFit = "cover",
         sizes="(max-width: 1024px) 100vw, 896px"
       />
       {/* Overlay oscuro para mantener el tono Gotham */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/10" />
+      <div className="absolute inset-0 bg-linear-to-t from-black via-black/50 to-black/10" />
       {/* Caption */}
       {caption && (
         <p

@@ -29,7 +29,7 @@ function ImagePanel({ src, alt, caption, rotate = "0.4deg", objectFit = "cover",
       {/* Caption */}
       {caption && (
         <p
-          className="absolute bottom-4 left-5 right-5 font-[family-name:var(--font-bangers)] text-batman-yellow text-2xl sm:text-3xl tracking-widest uppercase"
+          className="absolute bottom-4 left-5 right-5 font-(family-name:--font-bangers) text-batman-yellow text-2xl sm:text-3xl tracking-widest uppercase"
           style={{ textShadow: "2px 2px 0 #000" }}
         >
           {caption}

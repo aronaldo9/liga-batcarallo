@@ -101,7 +101,7 @@ export default async function ClasificacionPage() {
             Quiniela Batcarallo
           </p>
           <h1
-            className="font-[family-name:var(--font-bangers)] text-5xl sm:text-7xl text-batman-yellow tracking-widest"
+            className="font-(family-name:--font-bangers) text-5xl sm:text-7xl text-batman-yellow tracking-widest"
             style={{ textShadow: '4px 4px 0 #000' }}
           >
             Clasificación

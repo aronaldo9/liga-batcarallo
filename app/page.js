@@ -135,7 +135,7 @@ export default async function Home() {
     <p className="text-black text-xs font-black uppercase tracking-widest mb-1">
                 🏆 Campeón · {campeon.temporada}
               </p>
-              <p className="font-[family-name:var(--font-bangers)] text-black text-4xl tracking-widest leading-none">
+              <p className="font-(family-name:--font-bangers) text-black text-4xl tracking-widest leading-none">
                 {campeon.campeon}
               </p>
               <p className="text-black/60 text-sm font-bold uppercase tracking-widest mt-1">
@@ -155,7 +155,7 @@ export default async function Home() {
               <p className="text-batman-yellow text-xs font-black uppercase tracking-widest mb-1">
                 ⚡ Quiniela abierta
               </p>
-              <p className="font-[family-name:var(--font-bangers)] text-gotham-text text-3xl tracking-widest leading-none">
+              <p className="font-(family-name:--font-bangers) text-gotham-text text-3xl tracking-widest leading-none">
                 Jornada {quiniela.jornada.numero}
                 {quiniela.jornada.descripcion && ` · ${quiniela.jornada.descripcion}`}
               </p>
@@ -215,7 +215,7 @@ export default async function Home() {
       {/* Otros campeones de la temporada */}
       {otrosCampeones.length > 0 && (
         <section>
-          <h2 className="font-[family-name:var(--font-bangers)] text-gotham-text text-3xl tracking-widest mb-6 text-center">
+          <h2 className="font-(family-name:--font-bangers) text-gotham-text text-3xl tracking-widest mb-6 text-center">
             — Campeones {campeon?.temporada} —
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
@@ -228,7 +228,7 @@ export default async function Home() {
                 <p className="text-batman-yellow text-xs font-black uppercase tracking-widest mb-1">
                   🏆 {t.label}
                 </p>
-                <p className="font-[family-name:var(--font-bangers)] text-gotham-text text-2xl tracking-widest leading-none">
+                <p className="font-(family-name:--font-bangers) text-gotham-text text-2xl tracking-widest leading-none">
                   {t.data.nombre}
                 </p>
                 <p className="text-gotham-muted text-xs font-bold uppercase tracking-widest mt-1">
@@ -255,7 +255,7 @@ export default async function Home() {
 
       {/* Nav cards */}
       <section>
-        <h2 className="font-[family-name:var(--font-bangers)] text-batman-yellow text-4xl tracking-widest mb-8 text-center">
+        <h2 className="font-(family-name:--font-bangers) text-batman-yellow text-4xl tracking-widest mb-8 text-center">
           — Explora la Liga —
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
@@ -266,7 +266,7 @@ export default async function Home() {
               className={`block bg-gotham-card border-4 border-batman-yellow p-6 ${s.rotate} hover:rotate-0 hover:scale-105 transition-all duration-200 group`}
               style={{ boxShadow: "6px 6px 0 #000" }}
             >
-              <h3 className="font-[family-name:var(--font-bangers)] text-batman-yellow text-3xl tracking-widest mb-3">
+              <h3 className="font-(family-name:--font-bangers) text-batman-yellow text-3xl tracking-widest mb-3">
                 {s.label}
               </h3>
               <p className="text-gotham-muted text-sm leading-relaxed">{s.desc}</p>

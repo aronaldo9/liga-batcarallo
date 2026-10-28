@@ -33,7 +33,7 @@ export default function PalmaresPage() {
             Los que sobrevivieron
           </p>
           <h1
-            className="font-[family-name:var(--font-bangers)] text-5xl sm:text-7xl text-batman-yellow tracking-widest"
+            className="font-(family-name:--font-bangers) text-5xl sm:text-7xl text-batman-yellow tracking-widest"
             style={{ textShadow: "4px 4px 0 #000" }}
           >
             Palmarés
@@ -51,7 +51,7 @@ export default function PalmaresPage() {
           <p className="text-black text-xs font-black uppercase tracking-widest mb-1">
             🏆 Campeón actual · {palmares[0].temporada}
           </p>
-          <p className="font-[family-name:var(--font-bangers)] text-black text-5xl tracking-widest">
+          <p className="font-(family-name:--font-bangers) text-black text-5xl tracking-widest">
             {palmares[0].campeon}
           </p>
           <p className="text-black/70 text-sm font-bold mt-1 uppercase tracking-widest">
@@ -66,7 +66,7 @@ export default function PalmaresPage() {
         style={{ boxShadow: "6px 6px 0 #000" }}
       >
         <div className="bg-batman-yellow px-6 py-3">
-          <span className="font-[family-name:var(--font-bangers)] text-black text-xl tracking-widest uppercase">
+          <span className="font-(family-name:--font-bangers) text-black text-xl tracking-widest uppercase">
             Historial completo
           </span>
         </div>
@@ -89,7 +89,7 @@ export default function PalmaresPage() {
                   {i === 0 && <span className="text-batman-yellow mr-2">★</span>}
                   {p.temporada}
                 </td>
-                <td className="px-6 py-4 font-[family-name:var(--font-bangers)] text-lg tracking-wider text-batman-yellow">
+                <td className="px-6 py-4 font-(family-name:--font-bangers) text-lg tracking-wider text-batman-yellow">
                   {p.campeon}
                 </td>
                 <td className="px-6 py-4 text-gotham-muted hidden sm:table-cell">{p.equipo}</td>
@@ -108,7 +108,7 @@ export default function PalmaresPage() {
             Más allá de la liga
           </p>
           <h2
-            className="font-[family-name:var(--font-bangers)] text-5xl text-gotham-text tracking-widest"
+            className="font-(family-name:--font-bangers) text-5xl text-gotham-text tracking-widest"
             style={{ textShadow: "3px 3px 0 #000" }}
           >
             Copas y Torneos
@@ -124,7 +124,7 @@ export default function PalmaresPage() {
               style={{ boxShadow: "4px 4px 0 #000" }}
             >
               <div className="bg-gotham-border px-4 py-2">
-                <h3 className="font-[family-name:var(--font-bangers)] text-batman-yellow text-lg tracking-widest uppercase">
+                <h3 className="font-(family-name:--font-bangers) text-batman-yellow text-lg tracking-widest uppercase">
                   {competicion}
                 </h3>
               </div>

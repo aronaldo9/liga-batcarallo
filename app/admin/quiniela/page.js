@@ -152,7 +152,7 @@ function ResultadosForm({ jornada, partidos, onGuardado }) {
                 key={op}
                 type="button"
                 onClick={() => setResultados((prev) => ({ ...prev, [p.id]: op }))}
-                className={`w-10 py-1 font-[family-name:var(--font-bangers)] text-lg tracking-widest border transition-colors ${
+                className={`w-10 py-1 font-(family-name:--font-bangers) text-lg tracking-widest border transition-colors ${
                   resultados[p.id] === op
                     ? 'bg-batman-yellow text-black border-batman-yellow'
                     : 'bg-transparent text-gotham-muted border-gotham-muted hover:border-batman-yellow'
@@ -247,7 +247,7 @@ function JugadoresPanel() {
   return (
     <div className="bg-gotham-card border-4 border-batman-yellow overflow-hidden" style={{ boxShadow: '6px 6px 0 #000' }}>
       <div className="bg-batman-yellow px-5 py-3">
-        <h2 className="font-[family-name:var(--font-bangers)] text-black text-xl tracking-widest uppercase">
+        <h2 className="font-(family-name:--font-bangers) text-black text-xl tracking-widest uppercase">
           Estado jugadores
         </h2>
       </div>
@@ -373,7 +373,7 @@ export default function AdminQuinielaPage() {
       {/* Header */}
       <div className="mb-8">
         <p className="text-red-400 text-xs font-bold uppercase tracking-widest mb-1">Panel de Administración</p>
-        <h1 className="font-[family-name:var(--font-bangers)] text-5xl text-batman-yellow tracking-widest"
+        <h1 className="font-(family-name:--font-bangers) text-5xl text-batman-yellow tracking-widest"
           style={{ textShadow: '3px 3px 0 #000' }}>
           Quiniela Admin
         </h1>
@@ -407,7 +407,7 @@ export default function AdminQuinielaPage() {
           style={{ boxShadow: '6px 6px 0 #000' }}
         >
           <div className="bg-batman-yellow px-5 py-3">
-            <h2 className="font-[family-name:var(--font-bangers)] text-black text-xl tracking-widest uppercase">
+            <h2 className="font-(family-name:--font-bangers) text-black text-xl tracking-widest uppercase">
               Nueva jornada de quiniela
             </h2>
           </div>
@@ -432,7 +432,7 @@ export default function AdminQuinielaPage() {
               style={{ boxShadow: '6px 6px 0 #000' }}
             >
               <div className="bg-batman-yellow px-5 py-3 flex items-center justify-between">
-                <h2 className="font-[family-name:var(--font-bangers)] text-black text-xl tracking-widest uppercase">
+                <h2 className="font-(family-name:--font-bangers) text-black text-xl tracking-widest uppercase">
                   Jornada {j.numero}{j.descripcion ? ` · ${j.descripcion}` : ''}
                 </h2>
                 {j.estado === 'abierta' && (

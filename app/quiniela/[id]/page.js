@@ -12,7 +12,7 @@ export async function generateMetadata({ params }) {
 function ResultadoBadge({ valor }) {
   if (!valor) return <span className="text-gotham-muted">—</span>;
   return (
-    <span className="font-[family-name:var(--font-bangers)] text-batman-yellow text-lg">{valor}</span>
+    <span className="font-(family-name:--font-bangers) text-batman-yellow text-lg">{valor}</span>
   );
 }
 
@@ -91,7 +91,7 @@ export default async function QuinielaDetallePage({ params }) {
           Quiniela Batcarallo
         </p>
         <h1
-          className="font-[family-name:var(--font-bangers)] text-5xl text-batman-yellow tracking-widest"
+          className="font-(family-name:--font-bangers) text-5xl text-batman-yellow tracking-widest"
           style={{ textShadow: '3px 3px 0 #000' }}
         >
           Jornada {jornada.numero}
@@ -120,7 +120,7 @@ export default async function QuinielaDetallePage({ params }) {
             style={{ boxShadow: '6px 6px 0 #000' }}
           >
             <div className="bg-batman-yellow px-5 py-3">
-              <h2 className="font-[family-name:var(--font-bangers)] text-black text-xl tracking-widest uppercase">
+              <h2 className="font-(family-name:--font-bangers) text-black text-xl tracking-widest uppercase">
                 Partidos
               </h2>
             </div>
@@ -148,7 +148,7 @@ export default async function QuinielaDetallePage({ params }) {
               style={{ boxShadow: '6px 6px 0 #000' }}
             >
               <div className="bg-batman-yellow px-5 py-3">
-                <h2 className="font-[family-name:var(--font-bangers)] text-black text-xl tracking-widest uppercase">
+                <h2 className="font-(family-name:--font-bangers) text-black text-xl tracking-widest uppercase">
                   Tu pronóstico{yaEnvie && ' ✓'}
                 </h2>
               </div>
@@ -174,7 +174,7 @@ export default async function QuinielaDetallePage({ params }) {
               style={{ boxShadow: '6px 6px 0 #000' }}
             >
               <div className="bg-batman-yellow px-5 py-3">
-                <h2 className="font-[family-name:var(--font-bangers)] text-black text-xl tracking-widest uppercase">
+                <h2 className="font-(family-name:--font-bangers) text-black text-xl tracking-widest uppercase">
                   Tu pronóstico ✓
                 </h2>
               </div>
@@ -201,21 +201,21 @@ export default async function QuinielaDetallePage({ params }) {
         {/* Tabla de resultados */}
         {jornada.estado === 'con_resultado' && (
           <div>
-            <h2 className="font-[family-name:var(--font-bangers)] text-batman-yellow text-2xl tracking-widest uppercase mb-4">
+            <h2 className="font-(family-name:--font-bangers) text-batman-yellow text-2xl tracking-widest uppercase mb-4">
               Resultados
             </h2>
             <div className="bg-gotham-card border-2 border-batman-yellow overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-batman-yellow text-black">
-                    <th className="text-left px-3 py-2 font-[family-name:var(--font-bangers)] tracking-widest">#</th>
-                    <th className="text-left px-3 py-2 font-[family-name:var(--font-bangers)] tracking-widest">Usuario</th>
+                    <th className="text-left px-3 py-2 font-(family-name:--font-bangers) tracking-widest">#</th>
+                    <th className="text-left px-3 py-2 font-(family-name:--font-bangers) tracking-widest">Usuario</th>
                     {partidos.map((p) => (
-                      <th key={p.id} className="px-3 py-2 font-[family-name:var(--font-bangers)] tracking-widest text-center">
+                      <th key={p.id} className="px-3 py-2 font-(family-name:--font-bangers) tracking-widest text-center">
                         P{p.orden}
                       </th>
                     ))}
-                    <th className="px-3 py-2 font-[family-name:var(--font-bangers)] tracking-widest text-right">Pts</th>
+                    <th className="px-3 py-2 font-(family-name:--font-bangers) tracking-widest text-right">Pts</th>
                   </tr>
                 </thead>
                 <tbody>

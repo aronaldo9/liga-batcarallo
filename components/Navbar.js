@@ -29,7 +29,7 @@ export default async function Navbar() {
             className="object-contain"
             style={{ height: 'auto' }}
           />
-          <span className="font-[family-name:var(--font-bangers)] text-batman-yellow text-2xl tracking-widest group-hover:text-white transition-colors">
+          <span className="font-(family-name:--font-bangers) text-batman-yellow text-2xl tracking-widest group-hover:text-white transition-colors">
             Liga Batcarallo
           </span>
         </Link>

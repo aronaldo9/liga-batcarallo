@@ -90,7 +90,7 @@ export default function MemberCard({ miembro, logros = [], index, priority = fal
           </div>
 
           <div className="p-4">
-            <h3 className="font-[family-name:var(--font-bangers)] text-xl text-gotham-text tracking-wider leading-tight">
+            <h3 className="font-(family-name:--font-bangers) text-xl text-gotham-text tracking-wider leading-tight">
               {miembro.nombre}
             </h3>
             {miembro.apodo && (

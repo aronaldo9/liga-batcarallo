@@ -47,7 +47,7 @@ export default function PerfilPage() {
         <p className="text-batman-yellow text-xs font-bold uppercase tracking-widest mb-2">
           Tu cuenta
         </p>
-        <h1 className="font-[family-name:var(--font-bangers)] text-5xl sm:text-7xl text-batman-yellow tracking-widest"
+        <h1 className="font-(family-name:--font-bangers) text-5xl sm:text-7xl text-batman-yellow tracking-widest"
           style={{ textShadow: "4px 4px 0 #000" }}>
           Perfil
         </h1>
@@ -55,7 +55,7 @@ export default function PerfilPage() {
       </div>
 
       <div className="bg-gotham-card border-4 border-batman-yellow p-6" style={{ boxShadow: "6px 6px 0 #000" }}>
-        <h2 className="font-[family-name:var(--font-bangers)] text-batman-yellow text-2xl tracking-widest uppercase mb-6">
+        <h2 className="font-(family-name:--font-bangers) text-batman-yellow text-2xl tracking-widest uppercase mb-6">
           Cambiar contraseña
         </h2>
 

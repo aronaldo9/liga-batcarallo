@@ -89,7 +89,7 @@ export default function PronosticoForm({ jornadaId, partidos, valorInicial = {},
                   key={op}
                   type="button"
                   onClick={() => setSeleccion((prev) => ({ ...prev, [partido.id]: op }))}
-                  className={`w-14 py-2 font-[family-name:var(--font-bangers)] text-xl tracking-widest border-2 transition-colors ${
+                  className={`w-14 py-2 font-(family-name:--font-bangers) text-xl tracking-widest border-2 transition-colors ${
                     activo
                       ? 'bg-batman-yellow text-black border-batman-yellow'
                       : 'bg-transparent text-gotham-muted border-gotham-muted hover:border-batman-yellow hover:text-batman-yellow'

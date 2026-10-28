@@ -40,20 +40,20 @@ function SectionCard({ seccion, index }) {
       {/* Section header */}
       <div className={`${headerBgClass} px-6 py-3 flex items-center gap-3`}>
         <span
-          className={`font-[family-name:var(--font-bangers)] ${headerTextClass} text-2xl tracking-widest`}
+          className={`font-(family-name:--font-bangers) ${headerTextClass} text-2xl tracking-widest`}
           aria-hidden="true"
         >
           {String(index + 1).padStart(2, "0")}
         </span>
         <h2
           id={`section-${seccion.id}`}
-          className={`font-[family-name:var(--font-bangers)] ${headerTextClass} text-xl tracking-widest uppercase`}
+          className={`font-(family-name:--font-bangers) ${headerTextClass} text-xl tracking-widest uppercase`}
         >
           {seccion.titulo}
         </h2>
         {isPrize && (
           <span
-            className="ml-auto font-[family-name:var(--font-bangers)] text-black text-sm tracking-widest uppercase opacity-60"
+            className="ml-auto font-(family-name:--font-bangers) text-black text-sm tracking-widest uppercase opacity-60"
             aria-hidden="true"
           >
             Premios
@@ -87,7 +87,7 @@ export default function NormativaPage() {
             Aquí manda Batman
           </p>
           <h1
-            className="font-[family-name:var(--font-bangers)] text-7xl text-batman-yellow tracking-widest"
+            className="font-(family-name:--font-bangers) text-7xl text-batman-yellow tracking-widest"
             style={{ textShadow: "4px 4px 0 #000" }}
           >
             Normativa
@@ -126,7 +126,7 @@ export default function NormativaPage() {
         style={{ boxShadow: "6px 6px 0 #000" }}
       >
         <p
-          className="font-[family-name:var(--font-bangers)] text-batman-yellow text-3xl tracking-widest uppercase mb-2"
+          className="font-(family-name:--font-bangers) text-batman-yellow text-3xl tracking-widest uppercase mb-2"
           style={{ textShadow: "3px 3px 0 #000" }}
         >
           Trofeos

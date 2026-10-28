@@ -51,7 +51,7 @@ export default function LoginPage() {
             className="object-contain"
             style={{ height: 'auto' }}
           />
-          <h1 className="font-[family-name:var(--font-bangers)] text-black text-2xl tracking-widest uppercase">
+          <h1 className="font-(family-name:--font-bangers) text-black text-2xl tracking-widest uppercase">
             Acceso a Gotham
           </h1>
         </div>

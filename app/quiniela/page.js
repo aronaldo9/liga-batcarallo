@@ -81,7 +81,7 @@ export default async function QuinielaPage() {
             El pronóstico de Gotham
           </p>
           <h1
-            className="font-[family-name:var(--font-bangers)] text-5xl sm:text-7xl text-batman-yellow tracking-widest"
+            className="font-(family-name:--font-bangers) text-5xl sm:text-7xl text-batman-yellow tracking-widest"
             style={{ textShadow: '4px 4px 0 #000' }}
           >
             Quiniela
@@ -110,7 +110,7 @@ export default async function QuinielaPage() {
             <p className="text-black text-xs font-bold uppercase tracking-widest mb-1">
               ⚡ Jornada activa — plazo: {new Date(abierta.fecha_limite).toLocaleString('es-ES')}
             </p>
-            <p className="text-black font-[family-name:var(--font-bangers)] text-2xl tracking-widest">
+            <p className="text-black font-(family-name:--font-bangers) text-2xl tracking-widest">
               Jornada {abierta.numero}{abierta.descripcion ? ` · ${abierta.descripcion}` : ''}
               {misJornadas.has(abierta.id) ? ' ✓ Pronóstico enviado' : ' → Enviar pronóstico'}
             </p>
@@ -121,7 +121,7 @@ export default async function QuinielaPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Lista de jornadas */}
         <div className="lg:col-span-2">
-          <h2 className="font-[family-name:var(--font-bangers)] text-batman-yellow text-2xl tracking-widest uppercase mb-4">
+          <h2 className="font-(family-name:--font-bangers) text-batman-yellow text-2xl tracking-widest uppercase mb-4">
             Jornadas
           </h2>
           {jornadas.length === 0 ? (
@@ -135,7 +135,7 @@ export default async function QuinielaPage() {
                   className="bg-gotham-card border-2 border-gotham-muted hover:border-batman-yellow transition-colors px-4 py-3 flex items-center justify-between"
                 >
                   <div>
-                    <span className="font-[family-name:var(--font-bangers)] text-batman-yellow tracking-widest">
+                    <span className="font-(family-name:--font-bangers) text-batman-yellow tracking-widest">
                       J{j.numero}
                     </span>
                     {j.descripcion && (
@@ -163,7 +163,7 @@ export default async function QuinielaPage() {
             style={{ boxShadow: '3px 3px 0 #000' }}
           >
             <div className="bg-batman-yellow px-3 py-1.5 flex items-center justify-between">
-              <h3 className="font-[family-name:var(--font-bangers)] text-black text-base tracking-widest uppercase">
+              <h3 className="font-(family-name:--font-bangers) text-black text-base tracking-widest uppercase">
                 Mes actual
               </h3>
               <Link href="/clasificacion" className="text-black text-xs font-bold uppercase tracking-widest hover:underline">
@@ -195,7 +195,7 @@ export default async function QuinielaPage() {
             style={{ boxShadow: '3px 3px 0 #000' }}
           >
             <div className="bg-batman-yellow px-3 py-1.5 flex items-center justify-between">
-              <h3 className="font-[family-name:var(--font-bangers)] text-black text-base tracking-widest uppercase">
+              <h3 className="font-(family-name:--font-bangers) text-black text-base tracking-widest uppercase">
                 Pichichi
               </h3>
               <Link href="/clasificacion" className="text-black text-xs font-bold uppercase tracking-widest hover:underline">
